@@ -1,0 +1,87 @@
+/* select2 css 수정 */
+.select2-selection, .select2-container {
+    width: 120px !important;
+    height: 33px !important;
+
+}
+
+#select2-search-category-container {
+    margin-top: 2px;
+}
+
+.select2-selection__arrow {
+    margin-top: 2px;
+}
+
+
+.search-box {
+    position: absolute;
+    display: flex;
+    top: -5px;
+    right: 0;
+}
+
+.search-word {
+    position: relative;
+}
+
+.search-word input {
+    width: 180px;
+    height: 33px !important;
+    margin-left: 10px;
+    padding-left: 10px;
+    padding-right: 30px;
+    font-size: 1em;
+    border: 0.5px solid #fff;
+    border-radius: 5px;
+    background-color: rgb(230, 230, 230);
+}
+
+.search-word img {
+    position: absolute;
+    top: 6.5px;
+    right: 6px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+
+.ck-editor__editable_inline {
+    min-height: 400px;
+}
+
+/* board-form */
+
+.board-form {
+    display: flex;
+    width: 100%;
+    /* height: 350px; */
+}
+
+input {
+    height: 50px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    font-size: 1.5em;
+}
+
+textarea {
+    height: 250px;
+    padding-left: 10px;
+    font-size: 1.5em;
+    resize: none;
+}
+
+.data-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.file-count {
+    width: fit-content;
+    margin-left: 20px;
+    font-size: 1.3rem;
+    line-height: 43px;
+}

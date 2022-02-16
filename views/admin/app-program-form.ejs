@@ -1,0 +1,260 @@
+<link rel='stylesheet' href='/stylesheets/board-style.css' />
+<link rel='stylesheet' href='/stylesheets/board.css' />
+<link rel='stylesheet' href='/stylesheets/applicant-form.css' />
+
+<style>
+    .select2-selection, .select2-container {
+        width: 100% !important;
+    }
+    h5 {
+        margin-top: 20px;
+        margin-bottom: 5px;
+        margin-left: 10px;
+        font-size: 1rem;
+    }
+</style>
+
+<div class="contents-center mt-6 form-box" style="width: 600px !important;">
+    <div style="width: 600px;">
+
+        <!-- 심리지원서비스 -->
+        <div class="app-card">
+            <h2>0. 신청한 심리지원서비스</h2>
+            <div class="program-info">
+                <div class="pti">
+                    <select class="select-category select2-selection--single form-select form-select-solid" name="service" id="service" onchange="getProgramData(this)">
+                        <option value="" disabled hidden>프로그램 종류</option>
+                        <option <% if(result.category == '기초 심리교육') { %>selected<% } %>>기초 심리교육</option>
+                        <option <% if(result.category == '심층 심리교육') { %>selected<% } %>>심층 심리교육</option>
+                        <option <% if(result.category == '심리특강') { %>selected<% } %>>심리특강</option>
+                        <option <% if(result.category == '힐링자조모임') { %>selected<% } %>>힐링자조모임</option>
+                        <option <% if(result.category == '원데이힐링 프로그램') { %>selected<% } %>>원데이힐링 프로그램</option>
+                        <option <% if(result.category == '돌봄 및 감정노동 종사자 심리지원') { %>selected<% } %>>돌봄 및 감정노동 종사자 심리지원</option>
+                        <option <% if(result.category == '고립노인 심리지원') { %>selected<% } %>>고립노인 심리지원</option>
+                    </select>
+                </div>
+                <div class="pti">
+                    <h5>프로그램</h5>
+                    <select class="select-category select2-selection--single form-select form-select-solid" name="program" id="program">
+                        <!-- <option value="" selected disabled hidden>프로그램</option> -->
+                    </select>
+                    <input type="hidden" id="program_id" value="<%= result.program_id %>">
+                </div>
+            </div>
+        </div>
+
+        <!-- 이름 -->
+        <div class="app-card">
+            <h2>1. 성명(신청자)</h2>
+            <input class="mt-3" type="text" id="name" value="<%= result.name %>">
+        </div>
+
+        <!-- 성별 -->
+        <div class="app-card">
+            <h2>2. 성별</h2>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="gender" value="남" <% if (result.gender == '남') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>남</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="gender" value="여" <% if (result.gender == '여') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>여</p>
+                </label>
+            </div>
+            <div class="d-flex ccbox" style="position: relative;">
+                <div class="custom-checkbox custom-radio">
+                    <label class="checkbox-label">
+                        <input type="radio" name="gender" value="기타" <% if (result.gender !== '남' && result.gender !== '여') { %>checked<% } %>/>
+                        <span class="checkmark"></span>
+                        <p>기타: </p>
+                    </label>
+                </div>
+                <input type="text" id="gender" value="<% if (result.gender !== '남' && result.gender !== '여') { %><%= result.gender %><% } %>">
+            </div>
+        </div>
+
+        <!-- 생년월일 -->
+        <div class="app-card">
+            <h2>3. 생년월일</h2>
+            <!-- datepicker -->
+            <div class="datepicker mt-3">
+                <input type="text" name="birth" id="birth" value="<%= result.birth %>" placeholder="날짜">
+            </div>
+        </div>
+
+        <!-- 나이 -->
+        <div class="app-card">
+            <h2>4. 만 나이</h2>
+            <input class="mt-3" type="text" id="age" value="<%= result.age %>">
+        </div>
+
+        <!-- 주소 -->
+        <div class="app-card">
+            <h2>5. 현 주소</h2>
+            <input class="mt-3" type="text" id="adress" value="<%= result.adress %>">
+        </div>
+
+        <!-- 휴대전화 -->
+        <div class="app-card">
+            <h2>6. 휴대전화</h2>
+            <input class="mt-3" type="text" id="phone" value="<%= result.phone %>" placeholder="예시)000-0000-0000">
+        </div>
+
+        <!-- 이메일 -->
+        <div class="app-card">
+            <h2>7. 이메일</h2>
+            <input type="text" id="email" value="<%= result.email %>" placeholder="예시)aaa@aaaa.com">
+        </div>
+
+        <!-- 신청경위 -->
+        <div class="app-card">
+            <h2>8. 신청경위</h2>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="how" value="스스로 찾아서" <% if (result.how == '스스로 찾아서') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>스스로 찾아서</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="how" value="소개나 권유(지인)" <% if (result.how == '소개나 권유(지인)') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>소개나 권유(지인)</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="how" value="소개나 권유(회사, 기관 내)" <% if (result.how == '소개나 권유(회사, 기관 내)') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>소개나 권유(회사, 기관 내)</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="how" value="센터 SNS" <% if (result.how == '센터 SNS') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>센터 SNS</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="how" value="지인 SNS" <% if (result.how == '지인 SNS') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>지인 SNS</p>
+                </label>
+            </div>
+            <div class="d-flex ccbox" style="position: relative;">
+                <div class="custom-checkbox custom-radio">
+                    <label class="checkbox-label">
+                        <input type="radio" name="how" value="기타"
+                        <% if (result.how !== '스스로 찾아서' && result.how !== '소개나 권유(지인)'
+                                && result.how !== '소개나 권유(회사, 기관 내)' && result.how !== '센터 SNS'
+                                && result.how !== '지인 SNS') {
+                            %>checked<% } %>/>
+                        <span class="checkmark"></span>
+                        <p>기타: </p>
+                    </label>
+                </div>
+                <input type="text" id="how" value="<% if (result.how !== '스스로 찾아서' && result.how !== '소개나 권유(지인)'
+                                                && result.how !== '소개나 권유(회사, 기관 내)' && result.how !== '센터 SNS'
+                                                && result.how !== '지인 SNS') {
+                                            %><%= result.how %><% } %>">
+            </div>
+        </div>
+
+        <!-- 도움 영역 -->
+        <div class="app-card">
+            <h2>9. 도움 받고 싶은 영역 (중복 선택 가능)</h2>
+            <input class="mt-3" type="text" id="support" value="<%= result.support %>" placeholder="예시)000-0000-0000">
+        </div>
+
+        <!-- 기대하는 바 -->
+        <div class="app-card">
+            <h2>10. 프로그램에서 기대하는 바를 적어주세요. </h2>
+            <textarea name="" class="w-500" name="expect_detail" id="expect_detail" style="height: 250px; resize: vertical;"><%= result.expect_detail %></textarea>
+        </div>
+    </div>
+
+    <div class="buttons mt-3 float-right">
+        <button type="button" class="btn btn-light" onclick="location.href='/admin/appProgram'">취소</button>
+        <button type="button" class="btn btn-danger" id="btn-program-delete">삭제</button>
+        <button type="button" class="btn btn-primary" id="btn-program-update">수정</button>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="/javascripts/admin/applicants.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.select-category#service').select2({
+            "language": {
+                "noResults": function(){
+                    return "예정된 프로그램이 없습니다.";
+                }
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            minimumResultsForSearch: -1
+        });
+    });
+
+    $(document).ready(function() {
+        $('.select-category#program').select2({
+            "language": {
+                "noResults": function(){
+                    return "예정된 프로그램이 없습니다.";
+                }
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            minimumResultsForSearch: -1
+        });
+    });
+
+    getProgramData(document.getElementById('service'));
+
+
+    function getProgramData(dom) {
+        $.ajax({
+            type: 'get',
+            url: `/front/program/data`,
+            data:  { service: dom.value },
+            dataType: "json"
+            ,success: function(response) {
+                // console.log(response);
+
+                if(response.result != `service-error`) {
+
+                    if(response.data.length != 0) {
+                        const id = document.getElementById('program_id').value;
+
+                        document.getElementById('program').innerHTML = '<option value="" selected disabled hidden>프로그램 종류</option>';
+
+                        response.data.forEach((item) => {
+                            const selected = item.id == id ? 'selected' : '';
+                            $("#program").append(`<option value="${item.id}" ${selected}>${item.name}</option>`);
+                        });
+
+                        $(document).on("select2:open", () => {
+                            document.querySelector(".select2-container--open .select2-search__field").focus()
+                        });
+                    } else {
+                        document.getElementById('program').innerHTML = '<option value="" selected disabled hidden>예정된 프로그램이 없습니다.</option>';
+                    }
+                } else {
+
+                }
+            }, error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다.
+        }
+        });
+    }
+</script>

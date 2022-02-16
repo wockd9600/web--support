@@ -1,0 +1,242 @@
+<style>
+    .subconbox img {
+        max-width: 850px !important;
+    }
+</style>
+
+<div class="gg_wrap">
+    <!--gg_in여기까지-->
+
+    <!--sub top nav-->
+    <%- include('partials/ggm_topnav.ejs') %>
+    
+    <!--gg_topnav여기까지-->
+
+    
+    <!--컨텐츠 시작-->
+    <div class="ggcon">
+
+        <div class="gg_subtop">
+            <img src="/images/gg_topimg_08.jpg" alt="" width="100%" />
+        </div>
+
+
+        <!--내용-->
+        <div class="subcon tb">
+            <!--좌측메뉴-->
+            <%- include('partials/ggaside') %>
+
+            <!--우측메뉴-->
+            <div class="subright tbcelltop">
+                <!--서브타이틀-->
+                <div class="subtt">
+                    <h2>상세페이지</h2>
+                    <span>
+                        <a href="/"><img src="/images/s_home.png" alt="home" /></a>
+                        &nbsp;>&nbsp;
+                        <% if(spath == 'research') { %><a href="#">연구보고</a><% } else { %>
+                        <a href="#">소통공간</a>
+                        <% } %>
+                        &nbsp;>&nbsp;
+                        <a href="/commu/gallery">갤러리</a>
+                        &nbsp;>&nbsp;
+                        <a href="#">상세페이지</a>
+                    </span>
+                </div>
+
+                <!--서브컨텐츠-->
+                <div class="subconbox">
+
+                    <!-- 리드면 비밀번호 확인 페이지 -->
+                        <!-- <div class="bdpass" style="display: none;">
+                        <div class="bdpassbox">
+                            비밀번호를 입력하세요
+                            <input type="password" name="wpw">
+                            <div class="bdwritebtn">
+                            <a href="javascript:void(0);" class="cancelbtn" onclick="document.getElementsByClassName('bdpass')[0].style.display='none'">취소</a>&nbsp;&nbsp;
+                            <a href="javascript:void(0);" class="writebtn review-delete" style="display: none;">확인</a>
+                            <a href="javascript:void(0);" class="writebtn review-update" style="display: none;">확인</a>
+                            </div>
+                        </div>
+                        </div> -->
+
+                    
+                       
+                    
+
+                    <!--게시판 // 글쓰기 페이지-->
+                    <div class="bdw_wrap bdr">
+                        <div class="bdwrite tb" style="width: fit-content; margin: auto; border-bottom: 0px;">
+                            <span class="tbcellm att" style="width: fit-content; font-size: 2rem;" id="title"><%= result.title %></span>
+                        </div>
+                
+
+                        <!-- <div class="bdwrite tb">
+                            <div class="tbcellm wpw">비밀번호</div>
+                            <div class="tbcellm apw" name="password"></div>
+                        </div> -->
+
+                        <style>
+                            .tem-width {
+                                width: 850px;
+                            }
+                            .tem-content {
+                                margin-left: 15px;
+                                white-space: pre-wrap;
+                            }
+                        </style>
+                        <div class="bdwrite tb" style="width: fit-content; margin: auto;">
+                            <% for (i=0; i<imgResult.length; i++) { %>
+                            <img width="fit-content" class="tem-width"
+                                src="/images/gallery/<%= imgResult[i].img_url %>.<%= imgResult[i].img_type %>"
+                                alt="san francisco">
+                            <% } %>
+                            
+                            <div class="tem-content"><%= result.content %></div>
+                        </div>
+
+                        <!--bdw_wrap-->
+                    </div>
+                    <!--서브컨텐츠 여기까지-->
+                    <!--글등록 // 취소-->
+                    <div class="bdwritebtn">
+                        <a href="javascript:void(0);" onclick="javascript:history.back();" class="cancelbtn">목록</a>&nbsp;&nbsp;
+                        <% if(spath == 'review') { %><a href="javascript:void(0);" onclick="bdpass(1)" class="writebtn">수정</a><% } %>
+                        <% if(spath == 'review') { %><a href="javascript:void(0);" onclick="bdpass(0)" class="writebtn">삭제</a><% } %>
+                    </div>
+                </div>
+            </div>
+            <!--subright여기까지-->
+        </div>
+        <!--subcon tb 여기까지-->
+
+        <!--QUICK-->
+        <%- include('partials/ggquick') %>
+
+    </div>
+    <!--컨텐츠 여기까지-->
+
+
+    <!--FOOTER-->
+    <%- include('partials/gg_footer') %>
+
+    <!--gg_wrap 여기까지-->
+
+<script>
+    const reviewUpdate = document.getElementsByClassName('review-update')[0];
+    const reviewDelete = document.getElementsByClassName('review-delete')[0];
+
+    if (reviewDelete) {
+        reviewDelete.addEventListener('click', () => {
+            const query = new URLSearchParams(location.search);
+
+            $.ajax({
+                type: 'post',
+                url: '/review/delete',
+                data: {
+                    id: query.get('id'),
+                    pwd: document.getElementsByName('wpw')[0].value,
+                },
+                dataType: "json"
+                ,success: function(response) {
+                    //console.log(response);
+                    if(response.result != `review-error`) {
+            
+                        if(response.data != null && response.data != `pwd error`) {
+                            alert('삭제 되었습니다.');
+                            location.href = '/commu/review';
+
+                        } else {
+                            alert('오류입니다.');
+                        }
+                    } else {
+                        alert('비밀번호를 확인해주세요.');
+                    }
+                }, error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
+                }    
+            });
+        });
+    } else {}
+
+    if (reviewUpdate) {
+        reviewUpdate.addEventListener('click', () => {
+            const query = new URLSearchParams(location.search);
+
+            $.ajax({
+                type: 'post',
+                url: '/review/update',
+                data: {
+                    id: query.get('id'),
+                    pwd: document.getElementsByName('wpw')[0].value,
+                },
+                dataType: "json"
+                ,success: function(response) {
+                    //console.log(response);
+                    if(response.result != `review-error`) {
+            
+                        if(response.data != null && response.data != `pwd error`) {
+                            // 수정 페이지로 이동
+                            location.href = `/commu/review/update?id=${query.get('id')}`;
+
+                        } else {
+                            alert('오류입니다.');
+                        }
+                    } else {
+                        alert('비밀번호를 확인해주세요.');
+                    }
+                }, error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
+                }    
+            });
+        });
+    } else {}
+
+    getBoardDetailData();
+
+    function getBoardDetailData() {
+            const path = location.pathname.split('/');
+            const query = new URLSearchParams(location.search);
+        
+            let board = '';
+        
+            if (path[1] == 'research') {
+                board = path[1];
+            } else {
+                board = path[2];
+            }
+        
+            $.ajax({
+                type: 'GET',
+                url: `/commu/${board}/detail/data?id=${query.get('id')}`,
+                dataType: "json"
+                ,success: function(response) {
+                    //console.log(response);
+                    if(response.result != `board-error`) {
+            
+                        if(response.data != null && response.result != `${board}-error`) {
+                            const result = response.data
+                            document.getElementById('title').innerText = result.title;
+                            document.getElementById('writer').innerText = result.writer;
+                            document.getElementById('reg_date').innerText = result.reg_date;
+                            document.getElementById('hit').innerText = result.hit;
+                            document.getElementById('content').innerHTML = result.content;
+                        } else {}
+                    } else {
+            
+                    }
+                }, error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
+                    
+            }
+        });
+    }
+
+    function bdpass(s) {
+        document.getElementsByClassName('bdpass')[0].style.display='block';
+
+        // 수정
+        if (s == 1) {
+            reviewUpdate.style.display='inline-block';
+        } else {
+            reviewDelete.style.display='inline-block';
+        }
+    }
+</script>

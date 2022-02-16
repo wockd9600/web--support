@@ -1,0 +1,148 @@
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
+
+<link rel='stylesheet' href='/stylesheets/board-style.css' />
+<link rel='stylesheet' href='/stylesheets/board.css' />
+<link rel='stylesheet' href='/stylesheets/gallery.css' />
+
+
+<style>
+    li {
+        list-style: none;
+    }
+
+    a {
+        color: black;
+    }
+
+    .contents-center {
+        margin-top: 15px !important;
+    }
+
+    .img-box {
+        border: 1px solid black;
+    }
+
+    .btn-small {
+        padding: 3px 18px !important;
+    }
+</style>
+
+
+
+<div class="applicants contents-center">
+    <div class="" style="position: relative;">
+        <button type="button" class="btn btn-primary float-right mt-6 gallery-write btn-add" onclick="location.href='gallery/write'">추가</button>
+        <div class="gallerys">
+            <div class="gallery">
+                <div>
+                    <div class="img-box"><img src="" alt=""></div>
+                    <h1 class="mt-6 text-ellipsis">테스트 제목입니다. 테스트 제목입니다. 테스트 제목입니다. 제목입니다. </h1>
+                    <div class="buttons mt-6 float-right">
+                        <button type="button" class="btn btn-light btn-small" style="margin-right: 0.1rem;">삭제</button>
+                        <button type="button" class="btn btn-light btn-small" onclick="location.href='gallery/update?id=1'">수정</button>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery">
+                <div>
+                    <div class="img-box"><img src="" alt=""></div>
+                    <h1 class="mt-6 text-ellipsis">테스트 제목입니다.</h1>
+                    <div class="buttons mt-6 float-right">
+                        <button type="button" class="btn btn-light btn-small" style="margin-right: 0.1rem;">삭제</button>
+                        <button type="button" class="btn btn-light btn-small" onclick="location.href='gallery/update?id=2'">수정</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="pager mt-12">
+            <li><a href=""><</a></li>
+            <li><a href="">1</a></li>
+            <li><a href="">2</a></li>
+            <li><a href="">3</a></li>
+            <li><a href="">4</a></li>
+            <li><a href="">5</a></li>
+            <li>
+                <p>></p>
+                <!-- {{!-- <a href="">></a> --}} -->
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="/javascripts/board.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $.datepicker.setDefaults($.datepicker.regional['ko']);
+        $( "#d-day" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            nextText: '다음 달',
+            prevText: '이전 달',
+            dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            dateFormat: "yymmdd",
+            minDate: -3650,
+            maxDate: 3650, // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+            showMonthAfterYear: true,
+            onClose: function( selectedDate ) {
+                //시작일(startDate) datepicker가 닫힐때
+                //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+                $("#endDate").datepicker( "option", "minDate", selectedDate );
+            }
+        });
+        $( "#start-date" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            nextText: '다음 달',
+            prevText: '이전 달',
+            dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            dateFormat: "yymmdd",
+            minDate: -3650,
+            maxDate: 3650, // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+            showMonthAfterYear: true,
+            onClose: function( selectedDate ) {
+                //시작일(startDate) datepicker가 닫힐때
+                //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+                $("#endDate").datepicker( "option", "minDate", selectedDate );
+            }
+        });
+        $( "#end-date" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            nextText: '다음 달',
+            prevText: '이전 달',
+            dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            dateFormat: "yymmdd",
+            minDate: -3650,
+            maxDate: 3650, // 선택할수있는 최대날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+            showMonthAfterYear: true,
+            onClose: function( selectedDate ) {
+                // 종료일(endDate) datepicker가 닫힐때
+                // 시작일(startDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 시작일로 지정
+                $("#startDate").datepicker( "option", "maxDate", selectedDate );
+            }
+        });
+    });
+</script>
+<script type="text/javascript" src="/javascripts/board.js"></script>

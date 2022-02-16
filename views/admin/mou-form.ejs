@@ -1,0 +1,46 @@
+<link rel='stylesheet' href='/stylesheets/mou-form.css' />
+
+<div class="mou-add contents-center mt-9">
+    <% if(typeof(result) == 'object') { %>
+        <form action="/admin/mou/update" method="post" id="mou-update" enctype="multipart/form-data">
+    <% } else { %>
+        <form action="/admin/mou/write" method="post" id="mou-write" enctype="multipart/form-data">
+    <% } %>
+        <input type="hidden" name="id" id="id" value="<% if(typeof(result) == 'object') { %><%= result.id %><% } %>">
+        <div>
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('image').click()";>사진 첨부</button>
+            <input type="file" name="image" id="image" style="display: none;" accept=".jpeg, .bmp, .jpg, .png">
+        </div>
+        <div class="mt-3">
+            <span class="form-label" style="font-family: Poppins,Helvetica,sans-serif;">가장 적합한 이미지 크기는 295x200입니다.</span>
+        </div>
+        <div class="mou-form">
+            <div class="form-control form-control-solid form-preview" style="width: 40%;">
+                <img src="<% if(typeof(result) == 'object' && result.img_name !== 'null') { %>/images/mou/<%= result.img_name %>.<%= result.img_type %>" style="display: block;"<% } %>" class="preview-img" alt="">
+            </div>
+            <div class="data-form" style="margin-left: 25px;">
+                <div>
+                    <label for="exampleFormControlInput1" class="required form-label">기관명</label>
+                    <input type="text" name="name" id="name" placeholder="기관명" class="form-control form-control-solid" value="<% if(typeof(result) == 'object') { %><%= result.name %><% } %>">
+                </div>
+                <div class="mt-3">
+                    <label for="exampleFormControlInput1" class="form-label">협약내용, 협약시기</label>
+                    <textarea name="mou_content" id="mou_content" cols="30" rows="10" class="form-control form-control-solid" placeholder="협약내용, 협약시기"><% if(typeof(result) == 'object') { %><%= result.content %><% } %></textarea>
+                </div>
+                <div class="mt-3">
+                    <label for="exampleFormControlInput1" class="form-label">기관 홈페이지 URL</label>
+                    <input type="text" name="url" id="url" class="form-control form-control-solid" placeholder="기관 url" value="<% if(typeof(result) == 'object') { %><%= result.url %><% } %>">
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="buttons mt-3 float-right">
+        <button type="button" class="btn btn-light" onclick="location.href='/admin/mou'">취소</button>
+        <% if(typeof(result) == 'object') { %>
+            <button type="button" class="btn btn-primary" id="btn-mou-update">수정</button>
+        <% } else { %>
+            <button type="button" class="btn btn-primary" id="btn-mou-write">추가</button>
+        <% } %>
+    </div>
+</div>
+<script type="text/javascript" src="/javascripts/admin/mou.js"></script>

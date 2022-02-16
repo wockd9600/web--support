@@ -1,0 +1,155 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.close {position:relative;float:left;display:inline-block;*display:inline;width:fit-content;height:28px;text-align:center;margin-right:20px;}
+
+
+.close1:after {content: "\00d7"; font-size:15pt;line-height:35px;}
+
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.custom-border {
+    border: 1px solid rgb(224, 224, 224);
+    border-radius: 16px;
+}
+
+.dataTables_filter .form-control, .dataTables_length .form-select {
+    display: inline !important;
+    width: fit-content !important;
+}
+
+.center-box {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 45%;
+    transform: translateY(-50%);
+    width: 100%;
+    box-sizing: border-box;
+}
+.center-box > div {
+    position: relative;
+    margin: auto;
+}
+
+.contents-center {
+    width: 1280px !important;
+    margin: auto !important;
+}
+
+.btn-light {
+    border: 1px solid rgb(141, 141, 141) !important;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.form-control {
+    border: 0.5px solid #e7e7e7 !important;
+}
+
+.mb-0 {
+    margin-bottom: 0px !important;
+}
+
+.mt-6 {
+    margin-top: 2rem !important;
+}
+
+.mt-9 {
+    margin-top: 3rem !important;
+}
+
+.mt-12 {
+    margin-top: 4rem !important;
+}
+
+.mt-15 {
+    margin-top: 5rem !important;
+}
+
+.h-fit {
+    min-height: fit-content !important;
+}
+
+.wpx-100 {
+    width: 100px;
+}
+
+.w-200 {
+    width: 200px;
+}
+
+.w-300 {
+    width: 300px;
+}
+
+.w-400 {
+    width: 400px;
+}
+
+.w-500 {
+    width: 500px;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.auth {
+    margin-top: 15px;
+}
+
+.auth span {
+    margin: 0 3px;
+}
+
+.auth p {
+    height: fit-content;
+    margin-bottom: 0;
+}
+
+
+/*  그리드 */
+
+tr:hover {
+    background-color: rgb(243, 243, 243);
+}
+
+.selected {
+    background-color: rgba(0, 154, 214, 0.5) !important;
+    --bs-table-striped-bg: none !important;
+}
+
+.selected:hover {
+    background-color: rgba(0, 154, 214, 0.55) !important;
+    --bs-table-striped-bg: none !important;
+}
+
+.btn-add, .btn-delete {
+    padding: 8px 22px 7px 25px !important;
+    font-style: 600;
+}
+
+.popup-effect {
+    z-index: 105; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0, 10px);
+}

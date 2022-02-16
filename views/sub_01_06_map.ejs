@@ -1,0 +1,100 @@
+<!--
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="imagetoolbar" content="no">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+<title>경기도심리지원센터</title>
+</head>
+
+<body> -->
+
+<!--sub상단-->
+<div class="gg_wrap">
+    <!--gg_in여기까지-->
+    <!--상단메뉴-->
+    <%- include('partials/ggm_topnav.ejs') %>
+        <!--gg_topnav여기까지-->
+
+        <!--컨텐츠 시작-->
+        <div class="ggcon">
+
+          <!--중간 센터 이미지 -->
+          <div class="gg_subtop">
+              <img src="/images/gg_topimg_01.jpg" alt="" width="100%" />
+          </div>
+
+            <!--내용-->
+            <div class="subcon tb">
+                <!--좌측메뉴-->
+                <%- include('partials/ggaside') %>
+
+                <!--우측메뉴-->
+                <div class="subright tbcelltop">
+                    <!--서브타이틀-->
+                    <div class="subtt">
+                        <h2>오시는 길</h2>
+                        <span>
+                            <a href="/"><img src="/images/s_home.png" alt="home" /></a>
+                            &nbsp;>&nbsp;
+                            <a href="/center/introduce">센터소개</a>
+                            &nbsp;>&nbsp;
+                            <a href="">오시는 길</a>
+                        </span>
+                    </div>
+
+                    <!--서브컨텐츠-->
+                    <div class="subconbox">
+                        <div id="map" style="width:900px;height:400px;"></div>
+                        <div class="sub1_6 tb" style="margin-top: 20px;">
+                            <div class="sub1_6tt tbcellm">주소</div>
+                            <div class="sub1_6con tbcellm">
+                                경기도 용인시 수지구 수지로 37, 나동(수지농협) 3층
+                            </div>
+                        </div>
+                        <div class="sub1_6 tb">
+                            <div class="sub1_6tt tbcellm">전화 문의</div>
+                            <div class="sub1_6con tbcellm">
+                                031-272-1122
+                            </div>
+                        </div>
+                        <div class="sub1_6 tb">
+                            <div class="sub1_6tt tbcellm">버스</div>
+                            <div class="sub1_6con tbcellm">
+                                <span style="color: blue;">7-2, 82, 700-2, 720-1, 720-3, </span> <span style="color: red;">1570</span>
+                            </div>
+                        </div>
+                        <div class="sub1_6 tb">
+                            <div class="sub1_6tt tbcellm bdb">지하철</div>
+                            <div class="sub1_6con tbcellm bdb">
+                                성복역(신분당선)에서 도보 15분
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--subright여기까지-->
+            </div>
+            <!--subcon tb 여기까지-->
+
+            <!--QUICK-->
+            <%- include('partials/ggquick') %>
+
+        </div>
+        <!--컨텐츠 여기까지-->
+
+
+
+
+
+
+
+        <!--FOOTER-->
+        <%- include('partials/gg_footer') %>
+
+
+</div>
+<!--gg_wrap 여기까지-->
+<script type="text/javascript" src="/javascripts/map.js"></script>

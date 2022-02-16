@@ -1,0 +1,81 @@
+input[type=checkbox] {
+    height: fit-content;
+    transform : scale(1.3);
+}
+
+.applicants > div > h1 {
+    font-size: 1.2em;
+}
+
+.records-list {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+/* 
+.header, .body ul {
+    display: flex;
+    text-align: center;
+}
+
+.header {
+    padding: 12px 0;
+    font-size: 1.4em;
+    text-shadow: 0 0.6px;
+} */
+
+.body {
+    font-size: 1.2em;
+}
+
+.body ul {
+    padding: 8px 0;
+    border-top: 0.5px solid rgb(160, 160, 160);
+}
+
+.no {
+    width: 70px;
+}
+
+.category {
+    width: 170px;
+}
+
+.name {
+    width: 440px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.click-effect {
+    height: 28px;
+    cursor: pointer;
+}
+
+.click-effect:active {
+    color: rgb(148, 148, 148);
+}
+
+.d-day {
+    width: 200px;
+}
+
+.body .d-day > p {
+    font-size: 0.95em;
+}
+
+.pager {
+    position: absolute;
+    display: flex;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    margin: auto;
+}
+
+.pager > li {
+    font-size: 1.3em;
+}
+
+.pager li + li {
+    margin-left: 20px;
+}

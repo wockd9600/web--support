@@ -1,0 +1,119 @@
+input, select {
+    text-align: center;
+}
+
+.mt-15 {
+    margin-top: 8rem;
+}
+
+.applicants > div > h1 {
+    font-size: 1.2em;
+}
+
+.search-box {
+    padding: 20px;
+    /* border: 0.5px solid #000; */
+    font-family: Poppins,Helvetica,sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.search-box-first {
+    display: flex;
+}
+
+.search-box-first input, .search-box-first select, .search-box-first option {
+    width: 160px;
+    margin-right: 20px;
+}
+
+.search-box-second {
+    display: flex;
+}
+
+.search-box-second input, .search-box-second select {
+    width: 160px;
+}
+.datepicker span {
+    margin-top: 10px;
+    padding: 0 10px;
+}
+
+.search-box-second > p {
+    margin-top: 8px;
+    margin-right: 10px;
+}
+
+.search-btn {
+    position: absolute;
+    display: flex;
+    bottom:15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.program > .search-box-first {
+    margin: 0;
+}
+
+input, .program select {
+    height: 36px;
+}
+
+.program input + input {
+    margin-left: 5px;
+}
+
+.schedule-add-btn {
+    margin-left: 10px;
+    margin-bottom: 4px;
+}
+
+
+
+/* jqgrid css 수정 */
+
+.ui-th-div.ui-jqgrid-sortable {
+  text-align: center !important;
+}
+
+#jqgh_jqGrid_name {
+    text-align: left !important;
+}
+
+
+
+
+/* select css 수정 */
+.select2-container {
+    width: 160px !important;
+    margin-right: 25px;
+    font-family: Poppins,Helvetica,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.select2-selection, .select2-container {
+    height: 36px !important;
+}
+
+.select2-results__option--disabled {
+    display: none;
+}
+
+.select2-selection__arrow {
+    margin-top: 3px;
+}
+
+.select2-results__option {
+    text-align: center;
+}
+
+.select2-container--default .select2-selection--single {
+    border: 1px solid rgb(118, 118, 118);
+    border-radius: 2.5px;
+}
+
+#select2-category-container {
+    margin-top: 3px;
+    text-align: center;
+}

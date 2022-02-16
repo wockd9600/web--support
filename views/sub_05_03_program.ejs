@@ -1,0 +1,622 @@
+<link rel='stylesheet' href='/stylesheets/applicant-form.css' />
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<style>
+    /* select css 수정 */
+    .select2-container {
+        width: 50% !important;
+        margin-right: 25px;
+        font-family: Poppins,Helvetica,sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .select2-selection, .select2-container {
+        height: 36px !important;
+    }
+
+    .select2-results__option--disabled {
+        display: none;
+    }
+
+    .select2-selection__arrow {
+        margin-top: 3px;
+    }
+
+    .select2-results__option {
+    }
+
+    .select2-container--default .select2-selection--single {
+        border: 1px solid rgb(118, 118, 118);
+        border-radius: 2.5px;
+    }
+
+    #select2-category-container {
+        margin-top: 3px;
+    }
+
+    .select2-selection__rendered {
+        line-height: 34px !important;
+    }
+    .fs-16 {
+        font-size: 16px;
+    }
+
+    .program-agree {padding: 30px 80px 50px 80px;font-family: 'Noto Sans KR', sans-serif;border: 1px solid #e1e2e4;border-radius: 0.475rem;}
+    .program-agree h1 {margin-bottom: 40px !important;text-align: center;font-size: 1.8rem !important;}
+    .program-agree p {font-size: 1.25rem;}
+    .program-agree p + p {margin-top: 30px;}
+</style>
+
+<!--sub상단-->
+<div class="gg_wrap">
+    <!--gg_in여기까지-->
+
+    <!--상단메뉴-->
+    <%- include('partials/ggm_topnav.ejs') %>
+        <!--gg_topnav여기까지-->
+
+        <!--컨텐츠 시작-->
+        <div class="ggcon">
+
+          <!--중간 센터 이미지 -->
+          <div class="gg_subtop">
+              <img src="/images/gg_topimg_05.jpg" alt="" width="100%" />
+          </div>
+
+            <!--내용-->
+            <div class="subcon tb">
+                <!--좌측메뉴-->
+                <%- include('partials/ggaside') %>
+
+                <!--우측메뉴-->
+                <div class="subright tbcelltop">
+                    <!--서브타이틀-->
+                    <div class="subtt">
+                        <h2>프로그램 신청하기</h2>
+                        <span>
+                            <a href="/"><img src="/images/s_home.png" alt="home" /></a>
+                            &nbsp;>&nbsp;
+                            <a href="/online/calendar">온라인신청</a>
+                            &nbsp;>&nbsp;
+                            <a href="">프로그램 신청하기</a>
+                        </span>
+                    </div>
+
+                    <!-- 서브컨텐츠 -->
+                    <div class="subconbox">
+                        <div class="contents-center mt-6 form-box">
+                            <div class="counsel-chapter">
+                                <div class="app-card">
+                                    <% if(typeof(result) !== 'undefined') { %>
+                                    <div style="display: none;"><input type="text" name="program" id="program" value="0" hidden></div>
+                                    <div>
+                                        <h1>프로그램 정보</h1>
+                                    </div>
+                                    <div class="program-info">
+                                        <div class="pti">
+                                            <h1>프로그램 제목</h1>
+                                            <span><%= result.name %></span>
+                                        </div>
+                                        <div class="pcon">
+                                            <h1>프로그램 내용</h1>
+                                            <p><%= result.content %></p>
+                                        </div>
+                                        <div class="pcon pd">
+                                            <h1>프로그램 날짜</h1>
+                                            <span><% if(result.day == result.end_day) { %><%= result.day %><% } else { %><%= result.day %> ~ <%= result.end_day %><% } %></span>
+                                        </div>
+                                    </div>
+                                    <% } else { %>
+                                        <div>
+                                            <h1>프로그램 선택</h1>
+                                        </div>
+                                        <div class="program-info">
+                                            <div class="pti">
+                                                <h1>프로그램 종류</h1>
+                                                <select name="service" id="service" onchange="getProgramData(this)">
+                                                    <option value="" selected disabled hidden>프로그램 종류</option>
+                                                </select>
+                                            </div>
+                                            <div class="pti">
+                                                <h1>프로그램 제목</h1>
+                                                <select name="program" id="program" onchange="getProgramDetailData(this)">
+                                                    <!-- <option value="" selected disabled hidden>프로그램</option> -->
+                                                </select>
+                                            </div>
+                                            <div class="pcon content">
+                                                <h1>프로그램 내용</h1>
+                                            </div>
+                                            <div class="pcon pd">
+                                                <h1>프로그램 날짜</h1>
+                                            </div>
+                                        </div>
+                                    <% } %>
+                                </div>
+
+                                <div class="app-card">
+                                    <div style="margin-bottom: 1em;">
+                                        <h1>개인정보와 민감정보의 수집과 이용에 동의하시나요?</h1>
+                                        <h2>해당 동의는 필수 항목에 대한 동의 내용입니다. 선택정보 및 민감정보에 대한 동의를 거부하시는 경우 여기서 동의 해주신 뒤 이후 작성란에 작성을 하지 않으시면 자동으로 비동의하신 것으로 알겠습니다.</h2>
+                                    </div>
+
+                                    <table class="ggagree">
+                                      <tr>
+                                        <td colspan="3" class="agreett"><h3>상담 서비스 이용을 위한 개인정보 수집·이용 동의<h3></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="tcenter" >개인정보 및 민감정보<br>수집·이용의 목적</td>
+                                        <td colspan="2">
+                                          · 심리검사 및 개인상담 진행에 있어 내담자를 이해하는데 활용<br>
+                                          · 경기도 심리지원센터 주최의 행사 또는 프로그램 및 행사정보 등의 안내<br>
+                                          · 각종 증명서(수료증, 활동 참여 확인서 등) 발급<br>
+                                          · 경기도 심리지원센터 이용 현황 파악을 위한 통계 분석<br>
+                                          &nbsp; <span class="gray">(인구통계학적 분석 목적으로만 활용되며 이름 등의 개인식별 정보는 사용하지 않음)</span><br>
+                                          · 향후 내방 시 효과적 심리상담 진행 및 편의 제공
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td rowspan="2" style="width: 192px;"><span class="fs-16">1. 개인정보 수집·이용 항목</span></td>
+                                        <td style="width: 82.3px;"><span class="fs-16">필수 영역</span></td>
+                                        <td>성명, 생년월일, 성별, 나이, 핸드폰 번호</td>
+                                      </tr>
+                                      <tr>
+                                        <td><span class="fs-16">선택 영역</span></td>
+                                        <td>주소, 이메일, 비상연락처, 본인과의 관계, 선호상담방식, 내방경위, 가족관계,<br>건강상태, 도움받고 싶은 영역 등</td>
+                                      </tr>
+                                      <tr>
+                                        <td><span class="fs-16">2. 민감정보 수집·이용 항목</span></td>
+                                        <td colspan="2">병역, 종교, 상담 및 검사 경험, 주거형태</td>
+                                      </tr>
+                                      <tr>
+                                        <td colspan="3">
+                                          귀하는 선택 정보 및 민간정보 수집에 대한 동의를 거부할 수 있습니다.<br>
+                                          필수 정보에 동의를 거부할 경우 원활한 심리검사 및 개인상담의 진행이 불가할 수 있으나<br>
+                                          선택 정보에 대한 동의를 거부하셔도 심리검사 및 개인상담의 진행이 가능합니다.
+                                        </td>
+                                      </tr>
+                                    </table>
+
+                                    <div class="custom-checkbox">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="counsel-info-agree"/>
+                                            <span class="checkmark"></span>
+                                            <p>네, 동의합니다.</p>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="appbtn" id="btn-first-next-program">다음</button>
+                            </div>
+                            <div class="counsel-chapter" style="display: none;">
+                                <!-- 심리지원서비스 -->
+                                <!-- <div class="app-card">
+                                    <h1>0. 신청하시는 심리지원서비스를 선택해주세요.<span class="necessary">*</span></h1>
+                                    <select class="select-category select2-selection--single form-select form-select-solid" name="category" id="category">
+                                        <option value="" selected disabled hidden>상담명</option>
+                                        <option>개인상담</option>
+                                        <option>심리검사</option>
+                                        <option>돌봄 및 감정노동 종사자 심리지원</option>
+                                        <option>고인 노인 심리지원</option>
+                                    </select>
+                                </div> -->
+
+                                <!-- 이름 -->
+                                <div class="app-card">
+                                    <h1>1. 성명(신청자)<span class="necessary">*</span></h1>
+                                    <input type="text" id="name" value="">
+                                </div>
+
+                                <!-- 성별 -->
+                                <div class="app-card">
+                                    <h1>2. 성별<span class="necessary">*</span></h1>
+                                    <h5>그 외의 성별정체성 기재를 원할 경우 기타에 기재해주세요</h5>
+                                    <div class="custom-checkbox custom-radio">
+                                        <label class="checkbox-label">
+                                            <input type="radio" name="gender" value="남"/>
+                                            <span class="checkmark"></span>
+                                            <p>남</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox custom-radio">
+                                        <label class="checkbox-label">
+                                            <input type="radio" name="gender" value="여"/>
+                                            <span class="checkmark"></span>
+                                            <p>여</p>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex ccbox" style="position: relative;">
+                                        <div class="custom-checkbox custom-radio">
+                                            <label class="checkbox-label">
+                                                <input type="radio" name="gender" value="기타"/>
+                                                <span class="checkmark"></span>
+                                                <p>기타: </p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="gender">
+                                </div>
+
+                                <!-- 생년월일 -->
+                                <div class="app-card">
+                                    <h1>3. 생년월일<span class="necessary">*</span></h1>
+                                    <!-- datepicker -->
+                                    <div class="datepicker">
+                                        <input type="text" name="birth" id="birth" value="" placeholder="날짜">
+                                    </div>
+                                </div>
+
+                                <!-- 나이 -->
+                                <div class="app-card">
+                                    <h1>4. 만 나이<span class="necessary">*</span></h1>
+                                    <input type="number" id="age" value="" placeholder="예시)50">
+                                </div>
+
+                                <!-- 주소 -->
+                                <div class="app-card">
+                                    <h1>5. 현 주소<span class="necessary">*</span></h1>
+                                    <input type="text" id="adress" value="">
+                                </div>
+
+                                <!-- 휴대전화 -->
+                                <div class="app-card">
+                                    <h1>6. 휴대전화<span class="necessary">*</span></h1>
+                                    <h5>예시) 000-0000-0000</h5>
+                                    <input type="text" id="phone" value="" placeholder="예시)000-0000-0000">
+                                </div>
+                                
+                                <!-- 이메일 -->
+                                <div class="app-card">
+                                    <h1>7. 이메일<span class="necessary">*</span></h1>
+                                    <h5>예시)aaa@aaaa.com</h5>
+                                    <input type="text" id="email" value="" placeholder="예시)aaa@aaaa.com">
+                                </div>
+
+                                <!-- 신청경위 -->
+                                <div class="app-card">
+                                    <h1>8. 신청경위<span class="necessary">*</span></h1>
+                                    <h1></h1>
+                                    <div class="custom-checkbox custom-radio">
+                                        <label class="checkbox-label">
+                                            <input type="radio" name="how" value="스스로 찾아서"/>
+                                            <span class="checkmark"></span>
+                                            <p>스스로 찾아서</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox custom-radio">
+                                        <label class="checkbox-label">
+                                            <input type="radio" name="how" value="소개나 권유(지인)"/>
+                                            <span class="checkmark"></span>
+                                            <p>소개나 권유(지인)</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox custom-radio">
+                                        <label class="checkbox-label">
+                                            <input type="radio" name="how" value="소개나 권유(회사, 기관 내)"/>
+                                            <span class="checkmark"></span>
+                                            <p>소개나 권유(회사, 기관 내)</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox custom-radio">
+                                        <label class="checkbox-label">
+                                            <input type="radio" name="how" value="센터 SNS"/>
+                                            <span class="checkmark"></span>
+                                            <p>센터 SNS</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox custom-radio">
+                                        <label class="checkbox-label">
+                                            <input type="radio" name="how" value="지인 SNS"/>
+                                            <span class="checkmark"></span>
+                                            <p>지인 SNS</p>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex ccbox" style="position: relative;">
+                                        <div class="custom-checkbox custom-radio">
+                                            <label class="checkbox-label">
+                                                <input type="radio" name="how" value="기타"/>
+                                                <span class="checkmark"></span>
+                                                <p>기타: </p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="how">
+                                </div>
+
+                                <!-- 도움 영역 -->
+                                <div class="app-card">
+                                    <h1>9. 도움 받고 싶은 영역 (중복 선택 가능)<span class="necessary">*</span></h1>
+                                    <div class="custom-checkbox">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="support" value="가족 관계"/>
+                                            <span class="checkmark"></span>
+                                            <p>가족 관계</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="support" value="대인 관계"/>
+                                            <span class="checkmark"></span>
+                                            <p>대인 관계</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="support" value="성격 문제"/>
+                                            <span class="checkmark"></span>
+                                            <p>성격 문제</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="support" value="정서 문제"/>
+                                            <span class="checkmark"></span>
+                                            <p>정서 문제</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="support" value="행동 문제"/>
+                                            <span class="checkmark"></span>
+                                            <p>행동 문제</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="support" value="중독 문제"/>
+                                            <span class="checkmark"></span>
+                                            <p>중독 문제</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="support" value="성 관련 문제"/>
+                                            <span class="checkmark"></span>
+                                            <p>성 관련 문제</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="support" value="경제 문제"/>
+                                            <span class="checkmark"></span>
+                                            <p>경제 문제</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="support" value="실존적 문제"/>
+                                            <span class="checkmark"></span>
+                                            <p>실존적 문제</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="support" value="학업 문제"/>
+                                            <span class="checkmark"></span>
+                                            <p>학업 문제</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-checkbox">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="support" value="진로 문제"/>
+                                            <span class="checkmark"></span>
+                                            <p>진로 문제</p>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex ccbox" style="position: relative;">
+                                        <div class="custom-checkbox">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" name="support" value="기타"/>
+                                                <span class="checkmark"></span>
+                                                <p>기타: </p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="support">
+                                </div>
+
+                                <!-- 휴대전화 -->
+                                <div class="app-card">
+                                    <h1>10. 프로그램에서 기대하는 바를 적어주세요.<span class="necessary">*</span></h1>
+                                    <input type="text" name="expect_detail" id="expect_detail" value="" placeholder="">
+                                </div>
+
+                                <div class="d-flex buttons">
+                                    <button type="button" class="appbtn previous" id="btn-second-previous-program">이전</button>
+                                    <button type="button" class="appbtn" id="btn-second-next-program">다음</button>
+                                </div>
+                            </div>
+                            <div class="counsel-chapter" style="display: none;">
+                                <div class="app-card">
+                                    <!-- <img src="/images/온라인_프로그램동의서.png" alt="온라인_개인정보수집이용동의서" /> -->
+
+                                    <div class="program-agree">
+                                        <h1>프로그램 동의서</h1>
+                                        <p>본 프로그램 내용은 무단 녹음, 녹취, 녹화 및 외부 유출이 금지되어있습니다.</p>
+                                        <p>기관은 사업의 증빙용으로 사진을 찍을 수 있으며, 이에 대한 내용을 동의 받고 있습니다. 해당 사진은 홍보용으로 사용되지 않습니다.</p>
+                                    </div>
+                                    <div style="margin-top: 10px; margin-left: 35px;">
+                                        <div class="bm-1">
+                                            <h2>해당 동의서에 동의하시겠습니까? *</h2>
+                                            <h3 style="font-size: 0.8rem; font-weight: 500;">동의하지 않으시면, 프로그램 참여가 불가능합니다.</h3>
+                                        </div>
+                                        <div class="custom-checkbox">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="counsel-agree"/>
+                                                <span class="checkmark"></span>
+                                                <p>네, 동의합니다.</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex buttons">
+                                    <button type="button" class="appbtn" id="btn-third-previous-program">이전</button>
+                                    <button type="button" class="appbtn" id="btn-apply-program">신청</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--subright여기까지-->
+            </div>
+            <!--subcon tb 여기까지-->
+
+            <!--QUICK-->
+            <%- include('partials/ggquick') %>
+
+        </div>
+        <!--컨텐츠 여기까지-->
+
+
+        <!--FOOTER-->
+        <%- include('partials/gg_footer') %>
+
+
+</div>
+<!--gg_wrap 여기까지-->
+
+<!--
+</body>
+</html> -->
+
+<!-- select2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<!-- datepicker -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
+<script type="text/javascript" src="/javascripts/applicants.js"></script>
+
+<script>
+    $(document).ready(function () {
+			$.datepicker.setDefaults($.datepicker.regional['ko']);
+
+
+			$("#birth").datepicker({
+				changeMonth: true,
+				changeYear: true,
+				nextText: '다음 달',
+				prevText: '이전 달',
+				dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+				monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				dateFormat: "yymmdd",
+				minDate: -40000,
+				maxDate: 0, // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+				yearRange: "-120:+120",
+				showMonthAfterYear: true,
+			});
+    });
+</script>
+
+<script>
+    const service = document.getElementById('service');
+
+    $(document).ready(function() {
+        $('#service').select2({
+            "language": {
+                "noResults": function(){
+                    return "예정된 프로그램이 없습니다.";
+                }
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            minimumResultsForSearch: -1
+        });
+        $("#service").append(`<option>기초 심리교육</option>`);
+        $("#service").append(`<option>심층 심리교육</option>`);
+        $("#service").append(`<option>심리특강</option>`);
+        $("#service").append(`<option>힐링자조모임</option>`);
+        $("#service").append(`<option>원데이힐링 프로그램</option>`);
+        // $("#service").append(`<option>상담사 교육</option>`);
+        $("#service").append(`<option>돌봄 및 감정노동 종사자 심리지원</option>`);
+        $("#service").append(`<option>고립노인 심리지원</option>`);
+    });
+
+    $(document).ready(function() {
+        $('#program').select2({
+            "language": {
+                "noResults": function(){
+                    return "예정된 프로그램이 없습니다.";
+                }
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            minimumResultsForSearch: -1
+        });
+    });
+
+
+    function getProgramData(dom) {
+        $.ajax({
+            type: 'get',
+            url: `/front/program/data`,
+            data:  { service: dom.value },
+            dataType: "json"
+            ,success: function(response) {
+                // console.log(response);
+
+                if(response.result != `service-error`) {
+
+                    document.getElementsByClassName('content')[0].innerHTML = '<h1>프로그램 내용</h1>';
+                    document.getElementsByClassName('pd')[0].innerHTML = '<h1>프로그램 날짜</h1>';
+
+                    if(response.data.length != 0) {
+                        document.getElementById('program').innerHTML = '<option value="" selected disabled hidden>프로그램 종류</option>';
+
+                        response.data.forEach((item) => {
+                            $("#program").append(`<option value="${item.id}">${item.name}</option>`);
+                        });
+
+                        $(document).on("select2:open", () => {
+                            document.querySelector(".select2-container--open .select2-search__field").focus()
+                        });
+                    } else {
+                        document.getElementById('program').innerHTML = '<option value="" selected disabled hidden>예정된 프로그램이 없습니다.</option>';
+                    }
+                } else {
+
+                }
+            }, error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다.
+        }
+        });
+    }
+
+    function getProgramDetailData(dom) {
+        $.ajax({
+        type: 'get',
+        url: `/front/program/detail/data`,
+        data:  { id: dom.value },
+        dataType: "json"
+        ,success: function(response) {
+            // console.log(response);
+
+            if(response.result != `service-program-error`) {
+
+                if(response.data != null) {
+                    const content = document.getElementsByClassName('content')[0];
+                    const day = document.getElementsByClassName('pd')[0];
+
+                    content.innerHTML = '<h1>프로그램 내용</h1>'
+                    day.innerHTML = '<h1>프로그램 날짜</h1>'
+
+                    content.innerHTML += `<p style="white-space: pre-wrap">${response.data.content}</p>`;
+
+                    const d = response.data.day == response.data.end_day ? response.data.day : `${response.data.day} ~ ${response.data.end_day}`;
+                    day.innerHTML += `<span>${d}</span>`;
+                } else {}
+            } else {
+
+            }
+        }, error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다.
+        }
+        });
+    }
+</script>

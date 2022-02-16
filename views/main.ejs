@@ -1,0 +1,96 @@
+<!--메인상단-->
+<div class="ggm_wrap">
+    <div class="ggm_in">
+        <!--상단메뉴-->
+        <%- include('partials/ggm_topnav') %>
+            <!--gg_topnav여기까지-->
+
+                <!--슬라이드/이미지-->
+            <div class="gg_slidewrap">
+                <!--왼쪽슬라이드-->
+                <div class="tbcelltop lftslide relative">
+                <div class="slideshow-container">
+                    <div class="slide-in">
+                        <!--이미지1-->
+                        <!-- <div class="mySlides fade">
+                            <img width="500px" height="500px" src="/images/slider1.jpg" alt="놀러오세요 속마음의 숲" />
+                        </div> -->
+                        <!--이미지2-->
+                        <!-- <div class="mySlides fade">
+                            <img width="500px" height="500px" src="/images/slider2.jpg" alt="직장생활 락 & Roll" />
+                        </div> -->
+                        <!--이미지3-->
+                        <!-- <div class="mySlides fade">
+                            <img width="500px" height="500px" src="/images/slider3.jpg" alt="사회정의상담" />
+                        </div> -->
+                    </div>
+                    <!--next/prev-->
+                    <a class="mprev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="mnext" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+                <!--slideshow-container-->
+                <!--bullet-->
+                <div class="ggslide_btn">
+                    <!-- <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span> -->
+                </div>
+                </div>
+                <!--오른쪽이미지-->
+                <div class="tbcelltop rgtslide">
+                <img width="760px" height="500px" src="/images/main_img.jpg" alt="센터 로비" />
+                </div>
+            </div>
+            <!--슬라이드여기까지-->
+
+            <!--게시판-->
+            <div class="gg_mboard" style="height: 252px;">
+                <!--행사일정-->
+                <div class="ggmb1 tbcelltop">
+                <h2 style="top: 20px !important;">프로그램 일정</h2>
+                <span class="ggmmore"><a href="/online/program">+</a></span>
+                <ul name="ul-program-list">
+        
+                </ul>
+                </div>
+                <!--공지사항-->
+                <div class="ggmb2 tbcelltop">
+                <h2 style="top: 20px !important;">공지사항</h2>
+                <span class="ggmmore"><a href="/commu/notice">+</a></span>
+                <ul name="ul-notice-list">
+                    
+                </ul>
+                </div>
+                <!--온라인신청-->
+                <div class="ggmb3 tbcellm">
+                <a href="/online/calendar">
+                    <img src="/images/m_online.png" alt="온라인 신청" />
+                    <h4>온라인 신청<br>바로가기</h4>
+                </a>
+                </div>
+            </div>
+            <!--게시판 여기까지-->
+
+            <!--협력사-->
+
+            
+            <div class="gg_ccompany">
+                <ul class="gg_ccompany_in">
+                    <li><a href="#"><img src="images/경기도청.png" alt="협력사 배너1" /></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                </ul>
+            </div>
+            <!--협력사 여기까지-->
+    </div>
+    <!--gg_in 여기까지-->
+
+    <!--FOOTER-->
+    <%- include('partials/gg_footer') %>
+
+    <!--QUICK-->
+    <%- include('partials/ggquick') %>
+</div>
+<!--gg_wrap 여기까지-->
+<script type="text/javascript" src="/javascripts/main.js"></script>

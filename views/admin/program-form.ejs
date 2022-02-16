@@ -1,0 +1,72 @@
+<link rel='stylesheet' href='/stylesheets/mou-form.css' />
+
+<div class="mou-add contents-center network-form mt-9">
+    <form action="/mou/write" method="post" class="mt-3 mou-form">
+        <div class="data-form">
+
+            <!-- 분류 -->
+            <div class="mb-10">
+                <label for="exampleFormControlInput1" class="required form-label">분류</label>
+                <select class="select-category select2-selection--single form-select form-select-solid" name="category"
+                    id="category">
+                    <option value="" disabled hidden>분류</option>
+                    <option <% if(typeof(result) == 'object' && result.category == '기초 심리교육') { %>selected<% } %>>기초 심리교육</option>
+                    <option <% if(typeof(result) == 'object' && result.category == '심층 심리교육') { %>selected<% } %>>심층 심리교육</option>
+                    <option <% if(typeof(result) == 'object' && result.category == '심리특강') { %>selected<% } %>>심리특강</option>
+                    <option <% if(typeof(result) == 'object' && result.category == '힐링자조모임') { %>selected<% } %>>힐링자조모임</option>
+                    <option <% if(typeof(result) == 'object' && result.category == '원데이힐링 프로그램') { %>selected<% } %>>원데이힐링 프로그램</option>
+                    <option <% if(typeof(result) == 'object' && result.category == '돌봄 및 감정노동 종사자 심리지원') { %>selected<% } %>>돌봄 및 감정노동 종사자 심리지원</option>
+                    <option <% if(typeof(result) == 'object' && result.category == '고립노인 심리지원') { %>selected<% } %>>고립노인 심리지원</option>
+                </select>
+            </div>
+
+
+            <!-- 프로그램명 -->
+            <div class="mb-10">
+                <label for="exampleFormControlInput1" class="required form-label">프로그램 명</label>
+                <input type="text" name="name" id="name" placeholder="프로그램명" class="form-control form-control-solid"
+                    value="<% if(typeof(result) == 'object') { %><%= result.name %><% } %>"/>
+            </div>
+
+
+            <!-- 프로그램 일정 -->
+            <div class="mb-10">
+                <label for="exampleFormControlInput1" class="required form-label">프로그램 일정</label>
+                <div style="display: flex;">
+                    <div class="datepicker" style="width: 47%;">
+                        <input type="text" name="program-day" id="program-day" class="form-control form-control-solid"
+                            value="<% if(typeof(result) == 'object') { %><%= result.day %><% } %>"
+                            placeholder="시작 날짜"/>
+                    </div>
+                    <div><h1 style="height: 50px; line-height: 50px; margin-bottom: 0; margin-left: 20px;">~</h1></div>
+                    <div class="datepicker" style="width: 47%; margin-left: 20px;">
+                        <input type="text" name="program-end-day" id="program-end-day" class="form-control form-control-solid"
+                            value="<% if(typeof(result) == 'object') { %><%= result.end_day %><% } %>"
+                            placeholder="종료 날짜"/>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- 프로그램 설명 -->
+            <div class="mb-10">
+                <label for="exampleFormControlInput1" class="form-label">프로그램 설명</label>
+                <textarea name="content" id="program-content" class="form-control form-control-solid"
+                        placeholder="프로그램 설명"><% if(typeof(result) == 'object') { %><%= result.content %><% } %></textarea>
+            </div> 
+        </div>
+    </form>
+    <div class="buttons mt-3 float-right">
+        <button type="button" class="btn btn-light" onclick="location.href='/admin/program'">취소</button>
+        <% if(typeof(result) == 'object') { %>
+            <input type="text" id="is-copy" value="1" hidden>
+            <button type="button" class="btn btn-danger" id="btn-program-delete">삭제</button>
+            <button type="button" class="btn btn-primary" id="btn-program-update">수정</button>
+            <button type="button" class="btn btn-secondary" id="btn-program-write">복사</button>
+        <% } else { %>
+            <button type="button" class="btn btn-primary" id="btn-program-write">작성</button>
+        <% } %>
+    </div>
+</div>
+<script type="text/javascript" src="/javascripts/admin/program.js"></script>

@@ -1,0 +1,93 @@
+<link rel='stylesheet' href='/stylesheets/board-style.css' />
+<link rel='stylesheet' href='/stylesheets/board.css' />
+
+<style>
+    p {
+        margin-bottom: 0;
+    }
+    .form-box {
+        padding: 20px;
+        background-color: #fff;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid #eff2f5;
+        border-radius: .475rem;
+        box-shadow: 0 0 20px 0 rgb(76 87 125 / 2%);
+        box-sizing: border-box;
+    }
+    .cancel {display:inline-block; display:inline; height: 20.95px !important; padding-top: 0.4px;;margin-left: 3px;cursor: pointer; color: rgb(201, 111, 111);}
+    .cancel:after {display: inline-block; height: 20.95px !important; line-height: 21px; content: "\00d7"; font-size:15pt;}
+
+    #file-list {margin-left: 2px;}
+</style>
+
+<div class="contents-center mt-6 form-box">
+    <!-- <form  action="/admin/upload" method="post" enctype="multipart/form-data"
+            id="file-click">
+    
+        
+    </form> -->
+    <% if(typeof(result) == 'object') { %>
+        <form action="<%= spaths.url %>/update" class="mt-3" id="board-update" method="put" enctype="multipart/form-data">
+    <% } else { %>
+        <form action="<%= spaths.url %>/write" class="mt-3" id="board-write" method="post" enctype="multipart/form-data">
+    <% } %>
+
+        <input type="hidden" name="id" id="id" value="<% if(typeof(result) == 'object') { %><%= result.id %><% } %>">
+        <div class="file">
+            <div style="display: flex;">
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('file').click();">파일 첨부</button>
+                <input type="file" name="file" id="file" multiple style="display: none;">
+                <p class="file-count">총 <span class="file-count-value"><%= filelen %></span>개</p>
+            </div>
+            <div class="mt-5 mb-5" id="file-list">
+                <!-- javascript code -->
+                <% if(typeof(fileResult) !== 'undefined') { %>
+                    <% for (let i=0; i<fileResult.length; i++) { %>
+                        <div class="mb-4 fileIndex<%= fileResult[i].id %>">
+                            <!--begin::Item-->
+                            <div class="d-flex align-items-center mb-n1">
+                                <!--begin::Bullet-->
+                                <span class="bullet me-3"></span>
+                                <!--end::Bullet-->
+                                <!--begin::Label-->
+                                <a href="/uploads/board/<%= fileResult[i].file_url %>.<%= fileResult[i].file_type %>" download="<%= fileResult[i].file_originname %>"><div class="text-gray-600 fw-bold fs-6"><%= fileResult[i].file_originname %> <span>(<%= fileResult[i].file_size %>)</span></div></a>
+                                <div class="cancel" onclick="popFile('<%= fileResult[i].id %>', true);"></div>
+                                <!-- <div class="text-gray-600 fw-bold fs-6"><%= fileResult[i].file_originname %> <span>(<%= fileResult[i].file_size %>)</span></div> -->
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Item-->
+                        </div>
+
+                    <% } %>
+                <% } %>
+            </div>
+        </div>
+        <div class="separator separator-dashed"></div>
+        <div class="board-form mt-5">
+            <div class="data-form">
+                <div>
+                    <label for="exampleFormControlInput1" class="required form-label">제목</label>
+                    <input type="text" name="title" id="title" class="form-control form-control-solid" placeholder="제목" value="<% if(typeof(result) == 'object') { %><%= result.title %><% } %>">
+                </div>
+                <div>
+                    <label for="exampleFormControlInput1" class="required form-label">작성자</label>
+                    <input type="text" name="writer" id="writer" class="form-control form-control-solid" placeholder="작성자" value="<% if(typeof(result) == 'object') { %><%= result.writer %><% } %>">
+                </div>
+                <div>
+                    <label for="exampleFormControlInput1" class="required form-label">내용</label>
+                    <textarea class="form-control form-control-solid" name="content" id="content" cols="30" rows="10" placeholder="내용"><% if(typeof(result) == 'object') { %><%= result.content %> <% } %></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="buttons mt-3 float-right">
+        <button type="button" class="btn btn-light" onclick="location.href='<%= spaths.url %>'">취소</button>
+        <% if(typeof(result) == 'object') { %>
+            <button type="button" class="btn btn-primary" id="btn-board-update">수정</button>
+        <% } else { %>
+            <button type="button" class="btn btn-primary" id="btn-board-write">추가</button>
+        <% } %>
+    </div>
+</div>
+<script type="text/javascript" src="/javascripts/admin/board.js"></script>

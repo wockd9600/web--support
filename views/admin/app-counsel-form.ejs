@@ -1,0 +1,485 @@
+<link rel='stylesheet' href='/stylesheets/board-style.css' />
+<link rel='stylesheet' href='/stylesheets/board.css' />
+<link rel='stylesheet' href='/stylesheets/applicant-form.css' />
+
+<style>
+    .select2-selection, .select2-container {
+        width: 100% !important;
+    }
+</style>
+
+<div class="contents-center mt-6 form-box" style="width: 600px !important;">
+    <div style="width: 600px;">
+
+        <!-- 심리지원서비스 -->
+        <div class="app-card">
+            <h2>0. 신청한 심리지원서비스</h2>
+            <select class="select-category select2-selection--single form-select form-select-solid" name="category" id="category">
+                <option value="" selected disabled hidden>상담명</option>
+                <option <% if(result.category == '개인상담') { %>selected<% } %>>개인상담</option>
+                <option <% if(result.category == '심리검사') { %>selected<% } %>>심리검사</option>
+                <!-- <option <% if(result.category == '마음돌봄사업') { %>selected<% } %>>마음돌봄사업</option> -->
+            </select>
+        </div>
+
+        <!-- 이름 -->
+        <div class="app-card">
+            <h2>1. 성명(신청자)</h2>
+            <input class="mt-3" type="text" id="name" value="<%= result.name %>">
+        </div>
+
+        <!-- 성별 -->
+        <div class="app-card">
+            <h2>2. 성별</h2>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="gender" value="남" <% if (result.gender == '남') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>남</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="gender" value="여" <% if (result.gender == '여') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>여</p>
+                </label>
+            </div>
+            <div class="d-flex ccbox" style="position: relative;">
+                <div class="custom-checkbox custom-radio">
+                    <label class="checkbox-label">
+                        <input type="radio" name="gender" value="기타" <% if (result.gender !== '남' && result.gender !== '여') { %>checked<% } %>/>
+                        <span class="checkmark"></span>
+                        <p>기타: </p>
+                    </label>
+                </div>
+                <input type="text" id="gender" value="<% if (result.gender !== '남' && result.gender !== '여') { %><%= result.gender %><% } %>">
+            </div>
+        </div>
+
+        <!-- 생년월일 -->
+        <div class="app-card">
+            <h2>3. 생년월일</h2>
+            <!-- datepicker -->
+            <div class="datepicker mt-3">
+                <input type="text" name="birth" id="birth" value="<%= result.birth %>" placeholder="날짜">
+            </div>
+        </div>
+
+        <!-- 나이 -->
+        <div class="app-card">
+            <h2>4. 만 나이</h2>
+            <input class="mt-3" type="text" id="age" value="<%= result.age %>">
+        </div>
+
+        <!-- 주소 -->
+        <div class="app-card">
+            <h2>5. 현 주소</h2>
+            <input class="mt-3" type="text" id="adress" value="<%= result.adress %>">
+        </div>
+
+        <!-- 휴대전화 -->
+        <div class="app-card">
+            <h2>6. 휴대전화</h2>
+            <input class="mt-3" type="text" id="phone" value="<%= result.phone %>" placeholder="예시)000-0000-0000">
+        </div>
+
+        
+        <!-- 이메일 -->
+        <div class="app-card">
+            <h2>7. 이메일</h2>
+            <input type="text" id="email" value="<%= result.email %>" placeholder="예시)aaa@aaaa.com">
+        </div>
+
+        <!-- 종교 -->
+        <div class="app-card">
+            <h2>8. 본인의 종교</h2>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="religion" value="불교" <% if (result.religion == '불교') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>불교</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="religion" value="기독교" <% if (result.religion == '기독교') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>기독교</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="religion" value="천주교" <% if (result.religion == '천주교') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>천주교</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="religion" value="종교 없음" <% if (result.religion == '종교 없음') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>종교 없음</p>
+                </label>
+            </div>
+            <div class="d-flex ccbox" style="position: relative;">
+                <div class="custom-checkbox custom-radio">
+                    <label class="checkbox-label">
+                        <input type="radio" name="religion" value="기타"
+                        <% if (result.religion !== '' && result.religion !== '불교' && result.religion !== '기독교'
+                                && result.religion !== '천주교' && result.religion !== '종교 없음') {
+                            %>checked<% } %>/>
+                        <span class="checkmark"></span>
+                        <p>기타: </p>
+                    </label>
+                </div>
+                <input type="text" id="religion" value="<% if (result.religion !== '불교' && result.religion !== '기독교'
+                                                && result.religion !== '천주교' && result.religion !== '종교 없음') {
+                                            %><%= result.religion %><% } %>">
+            </div>
+        </div>
+
+        <!-- 주거 형태 -->
+        <div class="app-card">
+            <h2>9. 본인의 주거 형태</h2>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="dwelling" value="자가" <% if (result.dwelling == '자가') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>자가</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="dwelling" value="부모님 집" <% if (result.dwelling == '부모님 집') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>부모님 집</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="dwelling" value="기숙사" <% if (result.dwelling == '기숙사') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>기숙사</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="dwelling" value="자취" <% if (result.dwelling == '자취') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>자취</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="dwelling" value="친·인척집" <% if (result.dwelling == '친·인척집') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>친·인척집</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="dwelling" value="하숙" <% if (result.dwelling == '하숙') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>하숙</p>
+                </label>
+            </div>
+            <div class="d-flex ccbox" style="position: relative;">
+                <div class="custom-checkbox custom-radio">
+                    <label class="checkbox-label">
+                        <input type="radio" name="dwelling" value="기타"
+                        <% if (result.dwelling !== '' && result.dwelling !== '자가' && result.dwelling !== '부모님 집'
+                                && result.dwelling !== '기숙사' && result.dwelling !== '자취'
+                                && result.dwelling !== '친·인척집' && result.dwelling !== '하숙') {
+                            %>checked<% } %>/>
+                        <span class="checkmark"></span>
+                        <p>기타: </p>
+                    </label>
+                </div>
+                <input type="text" id="dwelling" value="<% if (result.dwelling !== '자가' && result.dwelling !== '부모님 집'
+                                                && result.dwelling !== '기숙사' && result.dwelling !== '자취'
+                                                && result.dwelling !== '친·인척집' && result.dwelling !== '하숙') {
+                                            %><%= result.dwelling %><% } %>">
+            </div>
+        </div>
+
+        <!-- 군필 -->
+        <div class="app-card">
+            <h2>10. 군필 여부</h2>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="discharge" value="군필" <% if (result.discharge == '군필') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>군필</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="discharge" value="미필" <% if (result.discharge == '미필') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>미필</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="discharge" value="면제" <% if (result.discharge == '면제') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>면제</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="discharge" value="해당없음" <% if (result.discharge == '해당없음') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>해당없음</p>
+                </label>
+            </div>
+        </div>
+
+        <!-- 신청경위 -->
+        <div class="app-card">
+            <h2>11. 신청경위</h2>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="how" value="스스로 찾아서" <% if (result.how == '스스로 찾아서') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>스스로 찾아서</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="how" value="소개나 권유(지인)" <% if (result.how == '소개나 권유(지인)') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>소개나 권유(지인)</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="how" value="소개나 권유(회사, 기관 내)" <% if (result.how == '소개나 권유(회사, 기관 내)') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>소개나 권유(회사, 기관 내)</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="how" value="센터 SNS" <% if (result.how == '센터 SNS') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>센터 SNS</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="how" value="지인 SNS" <% if (result.how == '지인 SNS') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>지인 SNS</p>
+                </label>
+            </div>
+            <div class="d-flex ccbox" style="position: relative;">
+                <div class="custom-checkbox custom-radio">
+                    <label class="checkbox-label">
+                        <input type="radio" name="how" value="기타"
+                        <% if (result.religion !== '' && result.how !== '스스로 찾아서' && result.how !== '소개나 권유(지인)'
+                                && result.how !== '소개나 권유(회사, 기관 내)' && result.how !== '센터 SNS'
+                                && result.how !== '지인 SNS') {
+                            %>checked<% } %>/>
+                        <span class="checkmark"></span>
+                        <p>기타: </p>
+                    </label>
+                </div>
+                <input type="text" id="how" value="<% if (result.how !== '스스로 찾아서' && result.how !== '소개나 권유(지인)'
+                                                && result.how !== '소개나 권유(회사, 기관 내)' && result.how !== '센터 SNS'
+                                                && result.how !== '지인 SNS') {
+                                            %><%= result.how %><% } %>">
+            </div>
+        </div>
+
+        <!-- 비상 연락처 -->
+        <div class="app-card">
+            <h2>12. 비상 연락처</h2>
+            <input class="mt-3" type="text" id="second_phone" value="<%= result.second_phone %>" placeholder="(이름, 관계, 000-0000-0000)">
+        </div>
+
+        <!-- 선호하는 상담방식(중복선택 가능) -->
+        <div class="app-card">
+            <h2>13. 선호하는 상담방식(중복선택 가능)</h2>
+            <input class="mt-3" type="text" id="counsel_way" value="<%= result.counsel_way %>">
+        </div>
+
+        <!-- 상담경험 -->
+        <div class="app-card">
+            <h2>14. 상당경험</h2>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="counsel_exp" value="있다" <% if (result.counsel_exp == '있다') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>있다(14-1, 14-2번 문항 응답)</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="counsel_exp" value="없다" <% if (result.counsel_exp == '없다') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>없다</p>
+                </label>
+            </div>
+        </div>
+
+        <!-- 이전 상담 기간 -->
+        <div class="app-card">
+            <h2>14-1. 이전 상담 기간</h2>
+            <input class="mt-3" type="text" class="w-500" id="counsel_period" value="<%= result.counsel_period %>">
+        </div>
+
+        <!-- 이전 상담의 종류 -->
+        <div class="app-card">
+            <h2>14-2. 이전 상담의 종류(중복선택 가능)</h2>
+            <input class="mt-3" type="text" class="w-500" id="counsel_category" value="<%= result.counsel_category %>">
+        </div>
+
+        <!-- 심리검사 경험 -->
+        <div class="app-card">
+            <h2>15. 심리검사 경험</h2>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="inspect_exp" value="있다" <% if (result.inspect_exp == '있다') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>있다(15-1, 15-2번 문항 응답)</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="inspect_exp" value="없다" <% if (result.inspect_exp == '없다') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>없다</p>
+                </label>
+            </div>
+        </div>
+
+        <!-- 이전 상담 기간 -->
+        <div class="app-card">
+            <h2>15-1. 이전 상담 기간</h2>
+            <div class="datepicker mt-3">
+                <input type="text" name="inspect-date" id="inspect_date" value="<%= result.inspect_date %>" placeholder="날짜">
+            </div>
+        </div>
+
+        <!-- 이전 상담의 종류 -->
+        <div class="app-card">
+            <h1>15-2. 이전 상담의 종류(중복선택 가능)</h1>
+            <input class="mt-3" type="text" class="w-500" id="inspect_category" value="<%= result.inspect_category %>">
+        </div>
+
+        <!-- 가족관계 -->
+        <div class="app-card">
+            <h2>16. 가족관계</h2>
+            <textarea name="" class="w-500" id="family" style="height: 100px; resize: vertical;"><%= result.family %></textarea>
+        </div>
+
+        <!-- 현재의 건강상태 -->
+        <div class="app-card">
+            <h2>17. 현재의 건강상태</h2>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="condi" value="매우 건강" <% if (result.condi == '매우 건강') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>매우 건강</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="condi" value="대체로 건강" <% if (result.condi == '대체로 건강') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>대체로 건강</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="condi" value="보통" <% if (result.condi == '보통') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>보통</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="condi" value="허약" <% if (result.condi == '허약') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>허약</p>
+                </label>
+            </div>
+            <div class="custom-checkbox custom-radio">
+                <label class="checkbox-label">
+                    <input type="radio" name="condi" value="매우 허약" <% if (result.condi == '매우 허약') { %>checked<% } %>/>
+                    <span class="checkmark"></span>
+                    <p>매우 허약</p>
+                </label>
+            </div>
+        </div>
+
+        <!-- 질병명 -->
+        <div class="app-card">
+            <h2>17-1. 질병이 있다면 구체적인 병명은 무엇인가요?</h1>
+            <input class="mt-3" type="text" class="w-500" id="desease" value="<%= result.desease %>">
+        </div>
+
+        <!-- 장애 여부 -->
+        <div class="app-card">
+            <h2>18. 장애 여부</h2>
+            <input class="mt-3" type="text" class="w-500" id="disability" value="<%= result.disability %>">
+        </div>
+
+        <!-- 도움 영역 -->
+        <div class="app-card">
+            <h2>19. 도움 받고 싶은 영역 (중복 선택 가능)</h2>
+            <input class="mt-3" type="text" class="w-500" id="support" value="<%= result.support %>">
+        </div>
+
+        <!-- 검사 영역 -->
+        <div class="app-card">
+            <h2>20. 신청하고자 하는 검사 영역</h2>
+            <input class="mt-3" type="text" class="w-500" id="inspect" value="<%= result.inspect %>">
+        </div>
+
+        <!-- 도움 받고 싶은 내용 -->
+        <div class="app-card">
+            <h2>21. 상담에서 도움 받고 싶은 내용을 구체적으로 작성해주세요. </h2>
+            <textarea name="" class="w-500" id="support_detail" style="height: 250px; resize: vertical;"><%= result.support_detail %></textarea>
+        </div>
+
+        <!-- 기대하는 바 -->
+        <div class="app-card">
+            <h2>22. 상담에서 기대하는 바를 적어주세요. </h2>
+            <textarea name="" class="w-500" id="expect_detail" style="height: 250px; resize: vertical;"><%= result.expect_detail %></textarea>
+        </div>
+
+        <!-- 상담 가능 시간 -->
+        <div class="app-card">
+            <h2>23. 상담 가능한 시간을 모두 선택해주세요.</h2>
+            <input class="mt-3" type="text" id="time" class="w-500" value="<%= result.time %>">
+        </div>
+    </div>
+
+    <div class="buttons mt-3 float-right">
+        <button type="button" class="btn btn-light" onclick="location.href='/admin/appCounsel'">취소</button>
+        <button type="button" class="btn btn-danger" id="btn-counsel-delete">삭제</button>
+        <button type="button" class="btn btn-primary" id="btn-counsel-update">수정</button>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="/javascripts/admin/applicants.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.select-category#category').select2({
+            "language": {
+                "noResults": function(){
+                    return "결과없음";
+                }
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            minimumResultsForSearch: -1
+        });
+    });
+</script>

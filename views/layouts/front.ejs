@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>경기도심리지원센터</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="imagetoolbar" content="no">
+    <meta name="description" content="경기도심리지원센터입니다. 각종 심리상담,교육,지원사업, 힐링을 제공합니다.">
+    <meta name="kerword" content="경기도심리지원센터,경기도,심리,상담,심리교육,지원사업,심리지원,심리센터,심리지원센터,센터,힐링" />
+    <meta name="naver-site-verification" content="6fce7d67f452f167a08e7d34638f6a2bc759122c" />
+    <meta name="NaverBot" content="All"/>
+    <meta name="NaverBot" content="index,follow"/>
+    <meta name="Yeti" content="All"/>
+    <meta name="Yeti" content="index,follow"/>	
+
+    <meta property="og:type" content="website"> 
+    <meta property="og:title" content="경기도심리지원센터">
+    <meta property="og:description" content="경기도심리지원센터입니다. 각종 심리상담,교육,지원사업, 힐링을 제공합니다.">
+    <meta property="og:image" content="http://ggdpsywithu.or.kr/images/logo_white.png">
+    <meta property="og:url" content="http://ggdpsywithu.or.kr/">
+
+
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <!-- <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" /> -->
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=zre2dmuy2x"></script>
+
+</head>
+
+
+
+<% if(typeof(main) !== 'undefined') { %>
+    <body style="background:url('/images/mainbg.png')no-repeat; background-size:cover; position:absolute;top:0;left:0; background-position:0% -250px;">
+<% } else { %>
+    <body>
+<% } %>
+
+    <%- body %>
+
+    <%- script %>
+
+        <!--NAV-->
+        <script>
+            var zoomx = 100;
+            $(document).ready(function () {
+                // alert(window.location.pathname);
+
+                $(".gg_topnav").hover(
+                    function () {
+                        $(".gg_snav").stop().slideDown(400);
+                    },
+                    function () {
+                        $(".gg_snav").stop().slideUp(600);
+                    }
+                );
+
+                $(".gg_snav").hover(
+                    function () {
+                        $(".gg_snav").stop().slideDown(400);
+                    },
+                    function () {
+                        $(".gg_snav").stop().slideUp(600);
+                    }
+                );
+
+                $(".tabBtn").hover(
+                    function () {
+
+                        $(this).children(".icon_normal").css("display", "none");
+                        $(this).children(".icon_over").css("display", "block");
+                    },
+                    function () {
+                        $(this).children(".icon_over").css("display", "none");
+                        $(this).children(".basic").css("display", "block");
+                    }
+                );
+
+                $(".tabBtn").click(
+                    function () {
+
+                        $("." + $(this).attr("tarx")).children(".icon_normal").addClass("basic");
+                        $("." + $(this).attr("tarx")).children(".icon_over").removeClass("basic");
+                        $(this).children(".icon_over").addClass("basic");
+                        $(this).children(".icon_normal").removeClass("basic");
+
+                        $("." + $(this).attr("tarx")).children(".icon_over").css("display", "none");
+                        $("." + $(this).attr("tarx")).children(".icon_normal").css("display", "none");
+                        $("." + $(this).attr("tarx")).children(".basic").css("display", "block");
+
+
+                        $("." + $(this).attr("tarc")).css("display", "none");
+                        $("#" + $(this).attr("tar")).css("display", "block");
+
+                        $("#" + $(this).attr("tarmc")).attr("href", $(this).attr("tarm"));
+
+                    }
+                );
+
+                //class="tabBtn tabBtngroupA" tar="lastA_1" tarc="lastA_1" tarx="tabBtngroupA"
+            });
+            function body_zoomin() {
+                zoomx = zoomx + 10;
+                $("body").css("zoom", zoomx + "%");
+            }
+            function body_zoomout() {
+                zoomx = zoomx - 10;
+                $("body").css("zoom", zoomx + "%");
+            }
+            function body_zoomdef() {
+                zoomx = 100;
+                $("body").css("zoom", zoomx + "%");
+            }
+            function newWin(url, w, h) {
+                window.open
+                    (url, 'new_win', 'width=' + w + ',height=' + h + ',toolbars=no,menubars=no,scrollbars=auto');
+            }
+        </script>
+        
+        <script>
+            const slides = document.getElementsByClassName("mySlides");
+            let slideIndex = 1;
+
+            if (slides.length != 0) {
+                slideIndex = 1;
+                showSlides(slideIndex);
+            } else { }
+
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+
+            function currentSlide(n) {
+                showSlides(slideIndex = n);
+            }
+
+            function showSlides(n) {
+                let i;
+                const slides = document.getElementsByClassName("mySlides");
+                const dots = document.getElementsByClassName("dot");
+                if (n > slides.length) { slideIndex = 1 }
+                if (n < 1) { slideIndex = slides.length }
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+            }
+
+            // function tabbActive(dom, index) {
+            //     document.getElementsByClassName('test-result')[0].style.display = 'none';
+            // 처리 제대로 안되서 에러남 2021.12.27 us.kim 다시 원복
+
+            //     const active = document.getElementsByClassName('active')[0];
+            //     active.classList.remove('active');
+            //     dom.classList.add('active');
+
+            //     const activeTab = document.getElementsByClassName('activetab')[0];
+                
+            //     if (activeTab) {
+            //         activeTab.classList.remove('activetab');
+            //     } else {}
+            //     const changeTab = document.getElementsByName('tab' + index)[0];
+            //     changeTab.classList.add('activetab');
+            // }
+
+            function  tabbActive(dom, index) {
+                const active = document.getElementsByClassName('active')[0];
+                active.classList.remove('active');
+                dom.classList.add('active');
+
+                const activeTab = document.getElementsByClassName('activetab')[0];
+
+                activeTab.classList.remove('activetab');
+                const changeTab = document.getElementsByName('tab' + index)[0];
+                changeTab.classList.add('activetab');
+            }
+        </script>
+
+</body>
+
+</html>

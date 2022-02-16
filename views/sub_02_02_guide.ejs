@@ -1,0 +1,92 @@
+<!--
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="imagetoolbar" content="no">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+<title>경기도심리지원센터</title>
+</head>
+
+<body> -->
+
+<!--sub상단-->
+<div class="gg_wrap">
+    <!--gg_in여기까지-->
+
+    <!--상단메뉴-->
+    <%- include('partials/ggm_topnav.ejs') %>
+        <!--gg_topnav여기까지-->
+
+        <!--컨텐츠 시작-->
+        <div class="ggcon">
+
+          <!--중간 센터 이미지 -->
+          <div class="gg_subtop">
+              <img src="/images/gg_topimg_02.jpg" alt="" width="100%" />
+          </div>
+
+            <!--내용-->
+            <div class="subcon tb">
+                <!--좌측메뉴-->
+                <%- include('partials/ggaside') %>
+
+                <!--우측메뉴-->
+                <div class="subright tbcelltop">
+                    <!--서브타이틀-->
+                    <div class="subtt">
+                        <h2>이용 안내 및 절차</h2>
+                        <span>
+                            <a href="/"><img src="/images/s_home.png" alt="home" /></a>
+                            &nbsp;>&nbsp;
+                            <a href="/counsel/introduce">심리·상담</a>
+                            &nbsp;>&nbsp;
+                            <a href="">이용 안내 및 절차</a>
+                        </span>
+                    </div>
+
+                    <!--서브컨텐츠-->
+                    <div class="subconbox">
+                        <!--SUB CONTENTS TAB-->
+                        <div class="tabb" style="width: 100%; ">
+                            <div class="stab active" onclick="tabbActive(this,1);"><p>개인상담</p></div>
+                            <div class="stab" onclick="tabbActive(this,2);"><p>심리평가</p></div>
+                        </div>
+                        <div name="tab1" class="tab_content activetab">
+                            <img src="/images/gg_2_2_01.jpg" alt="개인상담이란?" />
+                            <div>
+                                <button type="button" onclick="location.href='/online/counsel';" class="appbtn">신청하기</button>
+                            </div>
+                        </div>
+                        <div name="tab2" class="tab_content">
+                            <img src="/images/gg_2_2_02.jpg" alt="심리평가란" />
+
+                            <div>
+                                <button type="button" onclick="location.href='/online/counsel';" class="appbtn">신청하기</button>
+                            </div>
+                        </div>
+                        <!--SUB CONTENTS TAB 여기까지-->
+                    </div>
+                </div>
+                <!--subright여기까지-->
+            </div>
+            <!--subcon tb 여기까지-->
+
+            <!--QUICK-->
+            <%- include('partials/ggquick') %>
+
+        </div>
+        <!--컨텐츠 여기까지-->
+
+
+        <!--FOOTER-->
+        <%- include('partials/gg_footer') %>
+
+
+</div>
+<!--gg_wrap 여기까지-->
+
+<!--
+</body>
+</html> -->

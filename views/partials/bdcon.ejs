@@ -1,0 +1,108 @@
+<div class="bdcon">
+    <ul class="bdsubject">
+        <li>
+            <span class="bdnum">번호</span>
+            <span class="bdtt">제목</span>
+            <span class="bddate">등록</span>
+        </li>
+    </ul>
+    <!--게시판 내용-->
+    <ol class="bl rank">
+        <% if (result.length < 1) { %>
+            <li style="margin-top: 20px;text-align: center;">
+                <strong>등록된 글이 없습니다.</strong>
+            </li>
+        <% } else { %>
+            <% for (i=0; i<result.length; i++) { %>
+                <li class="lt1 ep">
+                    <a href="<% if(spath !== 'research') { %>/commu/<%= spath %><% } else { %>/research<% } %>/detail?id=<%= result[i].id %>">
+                        <span class="ltnum"><%= total - result[i].ROWNUM + 1%></span>
+                        <span class="tBox">
+                            <strong><%= result[i].title %></strong>
+                            <!-- <span class="new">NEW</span> -->
+                        </span>
+                        <span class="ltdate"><%= result[i].reg_date %></span>
+                    </a>
+                </li>
+            <% } %>
+        <% } %>
+        <!--
+        <li class="lt1 ep">
+            <a href="#">
+                <span class="ltnum">1</span>
+                <span class="tBox">
+                    <strong>[마감] MBTI 유형으로 즐거운 마음 여행하기 (11월 10일, 대면 교육)</strong>
+                </span>
+                <span class="ltdate">2021.01.15</span>
+            </a>
+        </li> -->
+    </ol>
+
+    <!--검색//글쓰기-->
+    <div class="tb">
+        <div class="tbcellm w40">
+            <div class="search-container">
+                <form action="">
+                    <select class="" name="category" id="category">
+                        <option value="title">제목</option>
+                        <option value="content">내용</option>
+                    </select>
+                    <input type="text" class="searchtxt" placeholder="검색어를 입력하세요"
+                        name="search" onkeyup="enterkey('<%= spath %>');">
+                    <button type="button" onclick="searchBoard('<%= spath %>');"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="tbcellm w60">
+            <div class="rgt bdread">
+                <% if(spath == 'review') { %>
+                <a href="/commu/review/write">글쓰기</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <!--검색여기까지-->
+
+    <!--paging-->
+    <div class="paging" id="viewPaging">
+        <% if (Math.floor((page-1) / 10) !== 0) { %>
+        <a class="next" href="javascript:void(0);" onclick="boardFilter(1, '<%= spath %>');"> &lt;&lt;</a>
+        <a class="next" href="javascript:void(0);" onclick="boardFilter(<%= Math.floor((page-1)/ 10) * 10 %>, '<%= spath %>');"> &lt;</a>
+        <% } else { %>
+            <a class="next"> &lt;&lt;</a>
+            <a class="next"> &lt;</a>
+        <% } %>
+        <% for (i=Math.floor((page-1) / 10) * 10 + 1; i<=Math.floor((page-1) / 10) * 10 + 10 && i<=max_page; i++) { %>
+            <a <% if (page == i) { %>class="on"<% } %> href="javascript:void(0);" onclick="boardFilter(<%= i %>, '<%= spath %>');"><%= i %></a>
+        <% } %>
+
+        <% if (Math.floor((page-1) / 10) * 10 + 11 <= max_page) { %>
+            <a class="next" href="javascript:void(0);" onclick="boardFilter(<%= Math.ceil((page) / 10) * 10 + 1 %>, '<%= spath %>');"> &gt;</a>
+            <a class="next" href="javascript:void(0);" onclick="boardFilter(<%= max_page %>, '<%= spath %>');"> &gt;&gt;</a>  
+            <% } else { %>
+                <a class="next"> &gt;</a>
+                <a class="next"> &gt;&gt;</a> 
+        <% } %>
+    </div>
+</div>
+
+<script>
+    function searchBoard(board) {
+        const category = document.getElementById('category').value;
+        const search = document.getElementsByName('search')[0].value;
+
+        if (board == 'research') {
+            location.href = `/research?page=1&search=${search}&category=${category}`;
+        } else {
+            location.href = `/commu/${board}?page=1&search=${search}&category=${category}`;
+        }
+    }
+
+    function enterkey(board) {
+        if (window.event.keyCode == 13) {
+             searchBoard(board);
+        }
+}
+
+
+</script>

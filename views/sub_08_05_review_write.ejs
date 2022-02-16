@@ -1,0 +1,102 @@
+<div class="gg_wrap">
+
+    <!--sub top nav-->
+    <%- include('partials/ggm_topnav.ejs') %>
+
+    <!--gg_topnav여기까지-->
+
+
+    <!--컨텐츠 시작-->
+    <div class="ggcon">
+
+      <!--중간 센터 이미지 -->
+      <div class="gg_subtop">
+          <img src="/images/gg_topimg_08.jpg" alt="" width="100%" />
+      </div>
+
+        <!--내용-->
+        <div class="subcon tb">
+            <!--좌측메뉴-->
+            <%- include('partials/ggaside') %>
+
+            <!--우측메뉴-->
+            <div class="subright tbcelltop">
+                <!--서브타이틀-->
+                <div class="subtt">
+                    <h2>센터이용후기 작성</h2>
+                    <span>
+                        <a href="/"><img src="/images/s_home.png" alt="home" /></a>
+                        &nbsp;>&nbsp;
+                        <a href="#">소통공간</a>
+                        &nbsp;>&nbsp;
+                        <a href="#">센터이용후기</a>
+                        &nbsp;>&nbsp;
+                        <a href="#">센터이용후기 작성</a>
+                    </span>
+                </div>
+
+                <!--서브컨텐츠-->
+                <div class="subconbox">
+
+                    <!--리드면 비밀번호 확인 페이지
+                        <div class="bdpass">
+                        <div class="bdpassbox">
+                            비밀번호를 입력하세요
+                            <input type="password" name="wpw">
+                            <div class="bdwritebtn">
+                            <a href="#" class="cancelbtn">취소</a>&nbsp;&nbsp;
+                            <a href="#" class="writebtn">확인</a>
+                            </div>
+                        </div>
+                        </div>
+                        -->
+
+                    <!--게시판 // 글쓰기 페이지-->
+                    <div class="bdw_wrap">
+                        <div class="bdwrite tb">
+                            <div class="tbcellm wname">이름</div>
+                            <div class="tbcellm aname"><input type="text" name="wname" value="<% if(typeof(result) !== 'undefined') { %><%= result.writer%><% } %>"></div>
+                        </div>
+                        <div class="bdwrite tb">
+                            <div class="tbcellm wpw">비밀번호</div>
+                            <div class="tbcellm apw"><input type="text" name="wpw" value="<% if(typeof(result) !== 'undefined') { %><%= result.pwd%><% } %>"></div>
+                        </div>
+                        <div class="bdwrite tb">
+                            <div class="tbcellm wtt">제목</div>
+                            <div class="tbcellm att"><input type="text" name="wtt" value="<% if(typeof(result) !== 'undefined') { %><%= result.title%><% } %>"></div>
+                        </div>
+                        <div class="bdwrite tb">
+                            <div class="tbcellm wcon">내용</div>
+                            <div class="tbcellm acon"><textarea name="wcon"><% if(typeof(result) !== 'undefined') { %><%= result.content%><% } %></textarea></div>
+                        </div>
+                        <!--bdw_wrap-->
+                    </div>
+                    <!--서브컨텐츠 여기까지-->
+                    <!--글등록 // 취소-->
+                    <div class="bdwritebtn">
+                        <a class="cancelbtn" href="javascript:void(0);" onclick="location.href='/commu/review'">취소</a>&nbsp;&nbsp;
+                        <% if(typeof(result) !== 'undefined') { %>
+                        <a href="javascript:void(0);" class="writebtn review-update">글 수정</a>
+                        <% } else {%>
+                        <a href="javascript:void(0);" class="writebtn review-write">글 등록</a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <!--subright여기까지-->
+        </div>
+        <!--subcon tb 여기까지-->
+
+        <!--QUICK-->
+        <%- include('partials/ggquick') %>
+
+    </div>
+    <!--컨텐츠 여기까지-->
+
+
+    <!--FOOTER-->
+    <%- include('partials/gg_footer') %>
+
+    <!--gg_wrap 여기까지-->
+
+    <script type="text/javascript" src="/javascripts/board-form.js"></script>

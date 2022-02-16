@@ -1,0 +1,222 @@
+<link rel='stylesheet' href='/stylesheets/applicant-form.css' />
+<link rel='stylesheet' href='/stylesheets/mou-form.css' />
+<link rel='stylesheet' href='/stylesheets/gallery.css' />
+
+
+<style>
+    .checkbox-label input:checked ~ .checkmark {
+        background-color: #337ab7;
+    }
+
+    /* .advert-img {
+        width: 500px;
+        height: 500px;
+    } */
+
+    .custom-checkbox {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .custom-checkbox p {
+        line-height: 24px;
+        margin-right: 5px;
+    }
+
+    .form-box {
+        padding: 20px;
+        background-color: #fff;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid #eff2f5;
+        border-radius: .475rem;
+        box-shadow: 0 0 20px 0 rgb(76 87 125 / 2%);
+        box-sizing: border-box;
+    }
+
+    .form-box {
+        width: 70% !important;
+        margin: auto;
+    }
+    
+    .preview-img {
+        max-width: 850px;
+        height: fit-content;
+        /* max-height: 400px; */
+    }
+
+    .pv {
+        display: none;
+        width: fit-content;
+        height: fit-content;
+    }
+</style>
+
+<div class="gallery contents-center form-box mt-9">
+
+    <% if(typeof(result) == 'object') { %>
+        <form action="/admin/gallery/update" method="put" class="mt-3 mou-form" enctype="multipart/form-data" id="gallery-update">
+    <% } else { %>
+        <form action="/admin/gallery/write" method="post" class="mt-3 mou-form" enctype="multipart/form-data" id="gallery-write">
+    <% } %>
+        <input type="hidden" name="id" id="id" value="<% if(typeof(result) !== 'undefined') { %><%= result.id %><% } %>">
+        <div class="img mb-3">
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('file-img').click();">사진 첨부</button>
+            <input type="file" name="file-img" id="file-img" style="display: none;" multiple accept=".jpeg, .bmp, .jpg, .png">
+        </div>
+
+        <% if(spaths.title == '갤러리') { %>
+        <div class="mt-3">
+            <span class="form-label" style="font-family: Poppins,Helvetica,sans-serif;">썸네일에 가장 적합한 이미지 크기는 440x300입니다.</span>
+        </div>
+        <% } %>
+
+        <% if(spaths.title == '홍보 갤러리') { %>
+        <div class="mt-3">
+            <span class="form-label" style="font-family: Poppins,Helvetica,sans-serif;">메인 홍보에 가장 적합한 이미지 크기는 500x500입니다.</span>
+        </div>
+        <% } %>
+
+        <div class="form-control form-control-solid pv" <% if(typeof(result) !== 'undefined') { %>style="display: block !important;"<% } %>>
+            <% if(typeof(imgResult) !== 'undefined') { %>
+                <% for(i=0; i<imgResult.length; i++) { %>
+                    <img src="/images/gallery/<%= imgResult[i].img_url %>.<%= imgResult[i].img_type %>" class="preview-img img<%= imgResult[i].id %> <% if(spaths.title == '홍보 갤러리') { %>advert-img<% } %>" data-index="<%= imgResult[i].id %>" data-upload="true" tabindex="0" alt=""/>
+                <% } %>
+            <% } %>
+        </div>
+        <div class="data-form mt-3">
+            <!-- <input type="text" name="name" id="name" class="form-control form-control-solid" placeholder="제목" value="<% if(typeof(result) == 'object') { %><%= result.title %><% } %>"> -->
+            <div>
+                <label for="exampleFormControlInput1" class="required form-label">제목</label>
+                <input type="text" name="name" id="name" placeholder="제목" class="form-control form-control-solid" value="<% if(typeof(result) !== 'undefined') { %><%= result.title %><% } %>">
+            </div>
+            <div class="mt-3">
+                <label for="exampleFormControlInput1" class="form-label">내용</label>
+                <textarea name="content" id="gallery_content" cols="30" rows="10" class="form-control form-control-solid" placeholder="내용"><% if(typeof(result) !== 'undefined') { %><%= result.content %><% } %></textarea>
+            </div>
+            <% if(spaths.title == '홍보 갤러리') { %>
+                <div class="custom-checkbox">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="advert" id="advert" <% if(typeof(result) !== 'undefined' && typeof(result.is_advert) !== 'undefined' && result.is_advert == 1) { %>checked<% } %>/>
+                        <span class="checkmark"></span>
+                        <p>메인에 올리기</p>
+                    </label>
+                </div>
+            <% } %>
+        </div>
+    </form>
+
+    <div class="buttons mt-3 float-right">
+        <% if(spaths.title == '홍보 갤러리') { %>
+            <button type="button" class="btn btn-light" onclick="location.href='/admin/advertGallery'">취소</button>
+        <% } else { %>
+                <button type="button" class="btn btn-light" onclick="location.href='/admin/gallery'">취소</button>
+        <% } %>
+        <% if(typeof(result) == 'object') { %>
+            <button type="button" class="btn btn-primary" id="btn-gallery-update">수정</button>
+        <% } else { %>
+            <button type="button" class="btn btn-primary" id="btn-gallery-write">추가</button>
+        <% } %>
+    </div>
+</div>
+
+<script type="text/javascript" src="/javascripts/admin/gallery.js"></script>
+
+<style>
+    .preview-img:focus {
+        border: 3px solid #337ab7;
+    }
+</style>
+<script>
+    // document.getElementsByClassName("preview-img")[0].style.display = 'block';
+    const galleryPreviewImg = document.getElementById('file-img');
+
+    window.onkeydown = (e) => {
+        if(e.key == 'Delete') {
+            popImage(document.activeElement)
+        } else {}
+    };
+
+
+
+    function popImage(dom) {
+        const id = dom.getAttribute('data-index');
+        const upload = dom.getAttribute('data-upload');
+
+        // console.log(id)
+        if (id) {
+            dom.style.display = 'none';
+        } else {}
+
+        if(upload !== 'false') {
+            deleteImages.push(id);
+        } else {
+            uploadImages[id].is_delete = true;
+        }
+    }
+
+    const uploadImages = [];
+    const deleteImages = [];
+    let imageIndex = 0;
+    
+    if (galleryPreviewImg) {
+        galleryPreviewImg.addEventListener('change', (event) => {
+            const obj = event.target;
+
+            if (obj.files) {
+                Array.from(obj.files).forEach((file) => {
+                    let file_type = file.name.split('.')[1].toLowerCase();
+                    let check_file_type = new Array();
+        
+                    check_file_type = ['jpg','gif','png','jpeg','bmp'];
+        
+                    if(check_file_type.indexOf(file_type) == -1){
+                        alert('이미지 파일만 선택할 수 있습니다.');
+                        let parent_Obj = file.parentNode
+                        let node = parent_Obj.replaceChild(file.cloneNode(true), file);
+                        
+                        return false;
+                    } else {}
+                });
+            } else {}
+            
+            console.log('images x')
+
+            if (obj.files) {
+                
+                const pv = document.getElementsByClassName("pv")[0];
+                // const img = document.getElementsByClassName("preview-img")[0];
+                
+                // pv.innerHTML = '';
+
+                Array.from(obj.files).forEach((file, index) => {
+                    const reader = new FileReader();
+
+                    const img = document.createElement("img")
+                    img.classList.add('preview-img');
+                    img.classList.add(`img${imageIndex}`);
+                    img.style.display = 'block';
+                    img.setAttribute("data-index", `${imageIndex++}`);
+                    img.setAttribute("data-upload", false);
+                    img.setAttribute("tabindex", 0);
+
+                    pv.append(img);
+
+                    reader.onload = function(event) {
+                        img.setAttribute("src", event.target.result);
+                    };
+
+                    uploadImages.push(file);
+        
+                    reader.readAsDataURL(file);
+                });
+
+                // console.log(uploadImages)
+                pv.style.display = 'block'
+
+                galleryPreviewImg.value = '';
+            } else {}
+        });
+    } else {}
+
+</script>

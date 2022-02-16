@@ -1,0 +1,155 @@
+<!--
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="imagetoolbar" content="no">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+<title>경기도심리지원센터</title>
+</head>
+
+<body> -->
+
+<!--sub상단-->
+<div class="gg_wrap">
+    <!--gg_in여기까지-->
+
+    <!--상단메뉴-->
+    <%- include('partials/ggm_topnav.ejs') %>
+        <!--gg_topnav여기까지-->
+
+        <!--컨텐츠 시작-->
+        <div class="ggcon">
+
+          <!--중간 센터 이미지 -->
+          <div class="gg_subtop">
+              <img src="/images/gg_topimg_02.jpg" alt="" width="100%" />
+          </div>
+
+            <!--내용-->
+            <div class="subcon tb">
+                <!--좌측메뉴-->
+                <%- include('partials/ggaside') %>
+
+                <!--우측메뉴-->
+                <div class="subright tbcelltop">
+                    <!--서브타이틀-->
+                    <div class="subtt">
+                        <h2>이용 안내 및 절차</h2>
+                        <span>
+                            <a href="/"><img src="/images/s_home.png" alt="home" /></a>
+                            &nbsp;>&nbsp;
+                            <a href="/counsel/introduce">심리·상담</a>
+                            &nbsp;>&nbsp;
+                            <a href="">내 마음 알기</a>
+                        </span>
+                    </div>
+
+                    <!--서브컨텐츠-->
+                <div class="subconbox">
+                    <!--SUB CONTENTS TAB-->
+                    <div class="tabb">
+                        <div class="stab active" onclick="tabbActive(this, 1);"><p>스트레스</p></div>
+                        <div class="stab" onclick="tabbActive(this, 2);"><p>불안</p></div>
+                        <div class="stab" onclick="tabbActive(this, 3);"><p>우울</p></div>
+                        <div class="stab" onclick="tabbActive(this, 4);"><p>분노</p></div>
+                    </div>
+                    <div name="tab1" class="tab_content activetab">
+                      <!--내 마음 알기// 결과 -->
+                      <div class="gg_mind_result">
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                        본 자가 검사는 자신의 정신건강을 스스로 점검해보기 위해 제공된 것이며, 정신건강의학과 전문의의 진단을 대신할 수 없습니다.
+                        <div class="mindtbox">
+                          <img src="/images/gg_customer.png" alt="" />
+                          <h2>결과보기</h2>
+                          <span>
+                            스트레스 척도 검진결과는 <span class="pink bold">결과점수</span>점으로,<br>
+                            <span class="pink bold">결과이름</span> 입니다.<br>
+                            상담을 원하시는 경우 아래로 문의해 주세요.
+                          </span>
+                          <div class="lineb"></div>
+                          <h2 class="pink">결과이름</h2>
+                          <span>
+                            심한 스트레스를 경험하고 있는 것으로 보입니다.<br>
+                            최근의 스트레스 요인 등 주변 환경에 대한 점검이 필요할 것으로 보이며,<br>
+                            우울이나 불안과 관련된 정신과적 문제로 발전하지 않도록 아래 번호로 연락 주시기 바랍니다.
+                          </span>
+                        </div>
+                        <div class="mindtbox">
+                          <img src="/images/gg_love.png" alt="" />
+                          <h2>자가 검사 점수기준</h2>
+                          <span>
+                            0점 ~ 13점 : 정상범위<br>
+                            14점 ~ 16점 : 경도 스트레스<br>
+                            17점 ~ 18점 : 중등도 스트레스<br>
+                            19점 ~ 40점 : 심한 스트레스<br>
+                          </span>
+                        </div>
+                        <div class="tb">
+                          <div class="tbcelltop mcall01">
+                            <h3>경기도 심리지원센터</h3>
+                            <button type="button">031-111-1111</button>
+                          </div>
+                          <div class="tbcelltop mcall02">
+                            <h3>정신건강위기상담전</h3>
+                            <button type="button">1577-0199</button>
+                          </div>
+                          <div class="tbcelltop mcall03">
+                            <h3>온라인 상담실</h3>
+                            <button type="button">바로가기</button>
+                          </div>
+                          <div class="tbcelltop mcall04">
+                            <h3>자살예방 상담전</h3>
+                            <button type="button">1393</button>
+                          </div>
+                        </div>
+
+                      </div>
+
+                        <div>
+                            <button type="button" class="appbtn">신청하기</button>
+                        </div>
+                    </div>
+                    <div name="tab2" class="tab_content">
+
+                        <div>
+                            <button type="button" class="appbtn">신청하기</button>
+                        </div>
+                    </div>
+                    <div name="tab3" class="tab_content">
+
+                        <div>
+                            <button type="button" class="appbtn">신청하기</button>
+                        </div>
+                    </div>
+                    <div name="tab4" class="tab_content">
+
+                        <div>
+                            <button type="button" class="appbtn">신청하기</button>
+                        </div>
+                    </div>
+                    <!--SUB CONTENTS TAB 여기까지-->
+                </div>
+            </div>
+            <!--subright여기까지-->
+        </div>
+        <!--subcon tb 여기까지-->
+
+        <!--QUICK-->
+        <%- include('partials/ggquick') %>
+
+    </div>
+    <!--컨텐츠 여기까지-->
+
+
+    <!--FOOTER-->
+    <%- include('partials/gg_footer') %>
+
+
+</div>
+<!--gg_wrap 여기까지-->
+
+<!--
+</body>
+</html> -->

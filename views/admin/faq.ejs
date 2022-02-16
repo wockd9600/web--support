@@ -1,0 +1,220 @@
+<style>
+	.list-style {
+		width: 100% !important;
+	}
+
+	.card-header {
+		position: relative;
+		height: 30px !important;
+		justify-content: left !important;
+		margin-left: 4px;
+	}
+
+	h3.card-title {
+		display: block !important;
+		line-height: 70px !important;
+		margin: 0 !important;
+	}
+
+	.name {
+		width: 600px;
+	}
+
+	.category {
+		width: 150px;
+		padding-right: 20px;
+		text-align: center;
+		box-sizing: content-box !important;
+	}
+
+	.d-day {
+		width: 200px;
+		margin-right: 0 !important;
+	}
+
+	.card-toolbar {
+		position: absolute;
+		top: 13px;
+		right: 35px;
+	}
+
+	.fg-0 {
+		flex-grow: 0 !important;
+	}
+
+	.fs-16 {
+		font-size: 16px;
+	}
+
+	.w-900 {
+		width: 900px !important;
+	}
+
+	.faq-box {
+		display: block !important;
+		padding-bottom: 30px;
+	}
+
+	.no {
+		width: 80px;
+		padding-right: 20px;
+		text-align: center;
+		box-sizing: content-box !important;
+	}
+
+	.no-text {
+		height: 40px;
+		line-height: 40px;
+	}
+
+	.title-text {
+		height: 37px;
+		line-height: 37px;
+	}
+
+	.mt-8 {
+		margin-top: 2rem !important;
+	}
+
+	#question, #answer {
+		width: 100%;
+		margin-bottom: 10px;
+		margin-right: 0;
+		padding-left: 10px;
+		font-family: Poppins, Helvetica, sans-serif !important;
+		font-size: 1.2rem;
+		color: #000;
+	}
+
+	.faq-text {
+		margin-right: 10px;
+		font-size: 1.6rem;
+	}
+
+	.answer-text {
+		width: 100%;
+		font-size: 1.1rem !important;
+		font-weight: 600;
+		font-family: Arial, Helvetica, sans-serif;
+		white-space: pre;
+	}
+
+	input {
+		text-align: left !important;
+	}
+
+	textarea {
+		height: 150px;
+	}
+
+	.answer {
+		display: none;
+		margin-top: 5px;
+		margin-left: 160px;
+	}
+
+	.btn-update {
+		padding: 5px 20px !important;
+	}
+
+
+
+
+	@media screen and (min-width: 1280px) {
+		.list-style {
+			width: 1280px !important;
+			margin: auto;
+			margin-top: 0px;
+		}
+	}
+</style>
+<link href="/stylesheets/datatable.css" rel="stylesheet" type="text/css" />
+
+<link rel='stylesheet' href='/stylesheets/applicants.css' />
+<div class="row g-5 g-xl-8 list-style">
+	<!--end::Col-->
+	<div class="col-xl-4 list-style">
+		<!--begin::List Widget 3-->
+
+		<div class="card card-xl-stretch mb-5 mb-xl-8">
+			<!--begin::Header-->
+			<!-- 주석 -->
+			<div class="card-toolbar">
+				<!--begin::Menu-->
+				<button type="button" class="btn btn-light btn-delete" id="btn-delete-answer" style="margin-right: 10px;">삭제</button>
+				<button type="button" class="btn btn-primary" onclick="location.href='/admin/faq/write'">
+					<!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
+					<span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">추가
+					</span>
+					<!--end::Svg Icon-->
+				</button>
+				<!--begin::Menu 3-->
+				<div class="custom-border menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px w-900 py-3"
+					data-kt-menu="true">
+					<!--begin::Header-->
+					<div class="card-header align-items-center border-0 mt-4 h-fit">
+						<h3 class="card-title align-items-start flex-column">
+							<span class="fw-bolder mb-2 text-dark">FAQ 추가</span>
+						</h3>
+					</div>
+					<!--end::Header-->
+					<!--begin::Body-->
+					<div class="card-body pt-5">
+						<div class="search-box mt-3">
+							<div class="search-box-first faq-box">
+								<div style="display: flex;">
+									<p class="faq-text">Q:</p>
+									<input type="text" name="question" id="question"
+										class="form-control form-control-solid" placeholder="질문">
+								</div>
+								<div style="display: flex;">
+									<p class="faq-text">A:</p>
+									<textarea name="answer" id="answer" class="form-control form-control-solid"
+										placeholder="답변"></textarea>
+								</div>
+								<button type="button" class="btn btn-primary float-right" id="btn-add-answer">추가</button>
+							</div>
+						</div>
+						<!--end::Timeline-->
+					</div>
+					<!--end: Card Body-->
+				</div>
+				<!--end::Menu 3-->
+			</div>
+			<!--end::Header-->
+
+			<!--begin::Body-->
+			<div class="card-body pt-2 mt-15 faq-body">
+				<table id="faq-table" class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
+					<thead>
+						<tr class="fw-bolder fs-6 text-gray-800 px-7">
+							<th>질문</th>
+							<th>답변</th>
+							<th style="width: 130px;">순서</th>
+							<th class="w-200">작성일자</th>
+						</tr>
+					</thead>
+					<style>
+						.saf{
+							overflow-x: hidden;
+						}
+					</style>
+					<tbody>
+						<!-- <tr>
+							<td>Tiger Nixon</td>
+							<td>System Architect</td>
+							<td>Edinburgh</td>
+							<td>61</td>
+							<td>2011/04/25</td>
+							<td>$320,800</td>
+						</tr> -->
+					</tbody>
+				</table>
+			</div>
+			<!--end::Body-->
+		</div>
+		<!--end:List Widget 3-->
+	</div>
+</div>
+<script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<script src="/javascripts/admin/faq.js"></script>

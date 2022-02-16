@@ -1,0 +1,128 @@
+<style>
+	.list-style {
+		width: 100% !important;
+	}
+
+	.card-header {
+		position: relative;
+		height: 30px !important;
+		justify-content: left !important;
+		margin-left: 4px;
+	}
+
+	h3.card-title {
+		display: block !important;
+		line-height: 70px !important;
+		margin: 0 !important;
+	}
+
+	.name {
+		width: 500px;
+	}
+
+	.category {
+		width: 150px;
+		padding-right: 20px;
+		text-align: center;
+		box-sizing: content-box !important;
+	}
+
+	.d-day {
+		width: 200px;
+		margin-right: 0 !important;
+	}
+
+	.card-toolbar {
+		position: absolute;
+		top: 13px;
+		right: 35px;
+	}
+
+	.fg-0 {
+		flex-grow: 0 !important;
+	}
+
+	.fs-16 {
+		font-size: 16px;
+	}
+
+	.w-800 {
+		width: 800px !important;
+	}
+
+	.h-300 {
+		height: 310px !important;
+	}
+
+	.btn-add {
+		padding: 8px 22px 7px 25px !important;
+		font-style: 600;
+	}
+
+	@media screen and (min-width: 1280px) {
+		.list-style {
+			width: 1280px !important;
+			margin: auto;
+			margin-top: 0px;
+		}
+	}
+	
+</style>
+<link href="/stylesheets/datatable.css" rel="stylesheet" type="text/css" />
+
+<link rel='stylesheet' href='/stylesheets/applicants.css' />
+<div class="row g-5 g-xl-8 list-style">
+	<!--begin::Col-->
+	<div class="col-xl-4 list-style">
+		<!--begin::List Widget 3-->
+		<div class="card card-xl-stretch mb-5 mb-xl-8">
+			<!--begin::Header-->
+			<!-- 주석 -->
+			<div class="card-toolbar">
+				<!--begin::Menu-->
+				<button type="button" class="btn btn-light btn-delete" id="btn-mou-delete" style="margin-right: 10px;">삭제</button>
+				<button type="button" class="btn btn-primary btn-add" onclick="location.href='/admin/mou/write'">
+					<!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
+					<span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">추가
+					</span>
+					<!--end::Svg Icon-->
+				</button>
+				<!--begin::Menu 3-->
+				<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px w-800 py-3" data-kt-menu="true">
+			<!--end::Header-->
+			<!--begin::Body-->
+			<div class="card-body pt-5">
+			<!--end::Timeline-->
+			</div>
+			<!--end: Card Body-->
+				</div>
+				<!--end::Menu 3-->
+			</div>
+			<div class="card-body pt-2 mt-15 board-body">
+				<table id="mou-table" class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
+					<thead>
+						<tr class="fw-bolder fs-6 text-gray-800 px-7">
+							<th class="w-500">기관명</th>
+							<th class="w-500">기관 url</th>
+							<th>작성일자</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- <tr>
+								<td>Tiger Nixon</td>
+								<td>System Architect</td>
+								<td>Edinburgh</td>
+								<td>61</td>
+								<td>2011/04/25</td>
+								<td>$320,800</td>
+							</tr> -->
+					</tbody>
+				</table>
+			</div>
+			<!--end::Body-->
+		</div>
+		<!--end:List Widget 3-->
+	</div>
+</div>
+<script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<script type="text/javascript" src="/javascripts/admin/mou.js"></script>
